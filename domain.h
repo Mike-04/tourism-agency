@@ -12,10 +12,10 @@ typedef struct{
     char destination[100];
     char type[100];
     Date departure_date;
-    int price;
+    float price;
 }Offer;
 
-Offer createOffer(char* destination, char* type, Date departure_date, int price);
+Offer createOffer(int id,char* destination, char* type, Date departure_date, float price);
 Date createDate(int year, int month, int day);
 
 void destroyOffer(Offer* o);
@@ -23,6 +23,8 @@ void destroyOffer(Offer* o);
 void destroyDate(Date* d);
 
 void testCreateOffer();
+
+void testCreateDestroy();
 
 int validateDate(Date d);
 

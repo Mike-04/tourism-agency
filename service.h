@@ -4,9 +4,7 @@
 /*
 Add a pet to the store
 */
-int addOffer(Offers* l, Offer p);
-
-
+int addOffer(Offers* l, char *destination, char *type, int year, int month, int day, float price);
 /*
   Filter pets in the store
   typeSubstring - cstring
@@ -14,5 +12,6 @@ int addOffer(Offers* l, Offer p);
 */
 Offers getAllOffers(Offers* l);
 
+void testAll();
 
 void testAddOffer();

@@ -40,7 +40,7 @@ void add(Offers* l, ElemType el);
 */
 Offers copyList(Offers* l);
 
-void remove(Offers* l, int poz);
+void delete(Offers* l, int poz);
 
 void update(Offers* l, int poz, ElemType el);
 

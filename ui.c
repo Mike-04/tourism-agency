@@ -1,4 +1,6 @@
 #include "ui.h"
+#include "repo.h"
+#include "service.h"
 #include <stdio.h>
 
 void display_menu()
@@ -11,8 +13,33 @@ void display_menu()
 	printf("6. Exit\n");
 }
 
+void add_offer_ui(Offers *l)
+{
+    printf("Type: ");
+    char type[20];
+    scanf_s("%s", type, 20);
+    printf("Destination: ");
+    char destination[20];
+    scanf_s("%s", destination, 20);
+    printf("Year: ");
+    int year;
+    scanf_s("%d", &year);
+    printf("Month: ");
+    int month;
+    scanf_s("%d", &month);
+    printf("Day: ");
+    int day;
+    scanf_s("%d", &day);
+    printf("Price: ");
+    float price;
+    scanf_s("%f", &price);
+    addOffer(l, destination, type, year, month, day, price);
+
+}
+
 void start()
 {
+    Offers l = createEmpty();
 	int option;
 	do {
 		display_menu();
@@ -20,7 +47,7 @@ void start()
 		switch (option)
 		{
 		case 1:
-			// Add offer
+			add_offer_ui(&l);
 			break;
 		case 2:
 			// Update offer

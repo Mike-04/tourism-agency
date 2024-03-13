@@ -1,7 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "service.h"
 #include "domain.h"
 #include "ui.h"
+
 /*
 9. Agentie de turism
 
@@ -18,5 +18,6 @@ Aplicatia permite:
 
 int main()
 {
+    testAll();
 	start();
 } // where test and layered arhitecture
