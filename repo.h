@@ -14,35 +14,35 @@ Offers createEmpty();
 /*
   Destroy list
 */
-void destroy(Offers* l);
+void destroy(Offers* offers);
 
 /*
   Get an element from the list
   poz - position of the element, need to be valid
   return element on the given position
 */
-ElemType get(Offers* l, int poz);
+ElemType get(Offers* offers, int poz);
 
 /*
   return number of elements in the list
 */
-int size(Offers* l);
+int size(Offers* offers);
 
 /*
   Add element into the list
   post: element is added to the end of the list
 */
-void add(Offers* l, ElemType el);
+void add(Offers* offers, ElemType el);
 
 /*
   Make a shallow copy of the list
-  return Mylist containing the same elements as l
+  return Mylist containing the same elements as offers
 */
-Offers copyList(Offers* l);
+Offers copyList(Offers* offers);
 
-void delete(Offers* l, int poz);
+void delete(Offers* offers, int poz);
 
-void update(Offers* l, int poz, ElemType el);
+void update(Offers* offers, int poz, ElemType el);
 
 void testCreateList();
 void testIterateList();
