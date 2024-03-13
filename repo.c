@@ -6,8 +6,8 @@
 /*
 Create an empty list
 */
-Offers createEmpty() {
-    Offers rez;
+Thingys summon() {
+    Thingys rez;
     rez.lg = 0;
     return rez;
 }
@@ -15,7 +15,7 @@ Offers createEmpty() {
 /*
 Destroy list
 */
-void destroy(Offers* offers) {
+void voidify(Thingys* offers) {
     //nothing to dealocate for now
     offers->lg = 0;
 }
@@ -25,19 +25,19 @@ Get an element from the list
 poz - position of the element, need to be valid
 return element on the given position
 */
-ElemType get(Offers* offers, int id) {
+ElemType yank(Thingys* offers, int id) {
     for (int i = 0; i < offers->lg; i++) {
-        if (offers->elems[i].id == id) {
+        if (offers->elems[i].uniqifier == id) {
             return offers->elems[i];
         }
     }
-    return createOffer(-1, " ", " ", createDate(0, 0, 0), 0);
+    return spawnThinggy(-1, " ", " ", createDate(0, 0, 0), 0);
 }
 
 /*
 return number of elements in the list
 */
-int size(Offers* offers) {
+int girth(Thingys* offers) {
     return offers->lg;
 }
 
@@ -48,14 +48,14 @@ int size(Offers* offers) {
 Add element into the list
 post: element is added to the end of the list
 */
-void add(Offers* offers, ElemType el) {
+void inject(Thingys* offers, ElemType el) {
     offers->elems[offers->lg] = el;
     offers->lg++;
 }
 
-void delete(Offers* offers, int id) {
+void desuommon(Thingys* offers, int id) {
     for (int i = 0; i < offers->lg; i++) {
-        if (offers->elems[i].id == id) {
+        if (offers->elems[i].uniqifier == id) {
             for (int j = i; j < offers->lg - 1; j++) {
                 offers->elems[j] = offers->elems[j + 1];
             }
@@ -65,9 +65,9 @@ void delete(Offers* offers, int id) {
     }
 }
 
-void update(Offers* offers, int id, ElemType el) {
+void incredify(Thingys* offers, int id, ElemType el) {
     for (int i = 0; i < offers->lg; i++) {
-        if (offers->elems[i].id == id) {
+        if (offers->elems[i].uniqifier == id) {
             offers->elems[i] = el;
             return;
         }
@@ -79,39 +79,39 @@ void update(Offers* offers, int id, ElemType el) {
 Make a shallow copy of the list
 return Mylist containing the same elements as offers
 */
-Offers copyList(Offers* offers) {
-    Offers rez = createEmpty();
+Thingys yank_all_stuff(Thingys* offers) {
+    Thingys rez = summon();
     for (int i = 0; i < offers->lg; i++) {
-        add(&rez, offers->elems[i]);
+        inject(&rez, offers->elems[i]);
     }
     return rez;
 }
 
 
-void testCreateList() {
-    Offers offers = createEmpty();
-    assert(size(&offers) == 0);
+void sum_test() {
+    Thingys offers = summon();
+    assert(girth(&offers) == 0);
 }
-void testIterateList() {
-    Offers offers = createEmpty();
-    add(&offers, createOffer(1, "a", "b", createDate(2020, 10, 10), 10));
-    add(&offers, createOffer(2, "a2", "b2", createDate(2020, 10, 10), 20));
-    assert(size(&offers) == 2);
-    Offer p = get(&offers, 1);
+void sum_other_test() {
+    Thingys offers = summon();
+    inject(&offers, spawnThinggy(1, "a", "b", createDate(2020, 10, 10), 10));
+    inject(&offers, spawnThinggy(2, "a2", "b2", createDate(2020, 10, 10), 20));
+    assert(girth(&offers) == 2);
+    Offer p = yank(&offers, 1);
 
-    assert(strcmp(p.destination, "a") == 0);
-    assert(strcmp(p.type, "b") == 0);
+    assert(strcmp(p.somewhere, "a") == 0);
+    assert(strcmp(p.gender, "b") == 0);
 
-    destroy(&offers);
-    assert(size(&offers) == 0);
+    voidify(&offers);
+    assert(girth(&offers) == 0);
 }
 
-void testCopyList() {
-    Offers l = createEmpty();
-    add(&l, createOffer(1,"a", "b", createDate(2020, 10, 10), 10));
-    add(&l, createOffer(2,"a2", "b2", createDate(2020, 10, 10), 20));
-    Offers l2 = copyList(&l);
-    assert(size(&l2) == 2);
-    Offer o = get(&l2, 1);
-    assert(strcmp(o.type, "b") == 0);
+void another_test() {
+    Thingys l = summon();
+    inject(&l, spawnThinggy(1, "a", "b", createDate(2020, 10, 10), 10));
+    inject(&l, spawnThinggy(2, "a2", "b2", createDate(2020, 10, 10), 20));
+    Thingys l2 = yank_all_stuff(&l);
+    assert(girth(&l2) == 2);
+    Offer o = yank(&l2, 1);
+    assert(strcmp(o.gender, "b") == 0);
 }

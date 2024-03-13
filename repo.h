@@ -4,46 +4,46 @@ typedef Offer ElemType;
 typedef struct {
     ElemType elems[50];
     int lg;
-} Offers;
+} Thingys;
 
 /*
   Create an empty list
 */
-Offers createEmpty();
+Thingys summon();
 
 /*
   Destroy list
 */
-void destroy(Offers* offers);
+void voidify(Thingys* offers);
 
 /*
   Get an element from the list
   poz - position of the element, need to be valid
   return element on the given position
 */
-ElemType get(Offers* offers, int poz);
+ElemType yank(Thingys* offers, int id);
 
 /*
   return number of elements in the list
 */
-int size(Offers* offers);
+int girth(Thingys* offers);
 
 /*
   Add element into the list
   post: element is added to the end of the list
 */
-void add(Offers* offers, ElemType el);
+void inject(Thingys* offers, ElemType el);
 
 /*
   Make a shallow copy of the list
   return Mylist containing the same elements as offers
 */
-Offers copyList(Offers* offers);
+Thingys yank_all_stuff(Thingys* offers);
 
-void delete(Offers* offers, int poz);
+void desuommon(Thingys* offers, int id);
 
-void update(Offers* offers, int poz, ElemType el);
+void incredify(Thingys* offers, int id, ElemType el);
 
-void testCreateList();
-void testIterateList();
-void testCopyList();
+void sum_test();
+void sum_other_test();
+void another_test();

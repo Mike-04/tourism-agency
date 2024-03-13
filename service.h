@@ -5,26 +5,26 @@
 /*
 Add a pet to the store
 */
-int addOffer(Offers* offers, char *destination, char *type, int year, int month, int day, float price);
+int do_smt_with_it(Thingys* offers, char *destination, char *type, int year, int month, int day, float price);
 /*
   Filter pets in the store
   typeSubstring - cstring
-  return all pets where typeSubstring is a substring of the type
+  return all pets where typeSubstring is a substring of the gender
 */
-Offers getAllOffers(Offers* offers);
+Thingys steal_sum_stuff(Thingys* offers);
 
-int updateOffer(Offers* offers, int id, Offer o);
+int evolve(Thingys* offers, int id, Offer o);
 
-int removeOffer(Offers* offers, int id);
+int slash_kill(Thingys* offers, int id);
 
-void orderByPriceAndDestination(Offers* offers);
+void chaosBySomeStuff(Thingys* offers);
 
-void add_random_offers(Offers* offers, int quantity);
+void sum_random_stuff(Thingys* offers, int quantity);
 
-void display(Offers* offers, bool reversed);
+void show_sum_other_stuff(Thingys* offers, bool reversed);
 
-Offers filterByCriteria(Offers offers,char type[],char dest[],float min_price,float max_price);
+Thingys stalin_sort(Thingys offers, char type[], char dest[], float min_price, float max_price);
 
-void testAll();
+void maybe();
 
-void testAddOffer();
+void some_random_operations();

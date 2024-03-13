@@ -4,17 +4,17 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-void display_menu()
+void show_som_stuff()
 {
 	printf("1. Add offer\n");
 	printf("2. Update offer\n");
 	printf("3. Delete offer\n");
-	printf("4. Order by price and destination\n");
+	printf("4. Order by cash and somewhere\n");
 	printf("5. Filter by criteria\n");
 	printf("6. Exit\n");
 }
 
-void add_offer_ui(Offers *l)
+void delete_ui(Thingys *l)
 {
     printf("Type:");
     char type[20];
@@ -34,11 +34,11 @@ void add_offer_ui(Offers *l)
     printf("Price:");
     float price;
     scanf_s("%f", &price);
-    addOffer(l, destination, type, year, month, day, price);
+    do_smt_with_it(l, destination, type, year, month, day, price);
 
 }
 
-void update_offer_ui(Offers *l)
+void downgrade_ui(Thingys *l)
 {
     printf("Id:");
     int id;
@@ -61,92 +61,92 @@ void update_offer_ui(Offers *l)
     printf("Price:");
     float price;
     scanf_s("%f", &price);
-    Offer o = createOffer(id, destination, type, createDate(year, month, day), price);
-    updateOffer(l, id, o);
+    Offer o = spawnThinggy(id, destination, type, createDate(year, month, day), price);
+    evolve(l, id, o);
 }
 
-void delete_offer_ui(Offers *l)
+void add_ui(Thingys *l)
 {
     printf("Id:");
     int id;
     scanf_s("%d", &id);
-    removeOffer(l, id);
+    slash_kill(l, id);
 }
 
-void display(Offers* offers, bool reversed) {
+void show_sum_other_stuff(Thingys* offers, bool reversed) {
     if (reversed==false)
     for (int i = 0; i < offers->lg; i++) {
-        printf("Id: %d, Type: %s, Destination: %s, Departure date: %d-%d-%d, Price: %f\n", offers->elems[i].id, offers->elems[i].type, offers->elems[i].destination, offers->elems[i].departure_date.year, offers->elems[i].departure_date.month, offers->elems[i].departure_date.day, offers->elems[i].price);
+        printf("Id: %d, Type: %s, Destination: %s, Departure date: %d-%d-%d, Price: %f\n", offers->elems[i].uniqifier, offers->elems[i].gender, offers->elems[i].somewhere, offers->elems[i].when.year, offers->elems[i].when.month, offers->elems[i].when.day, offers->elems[i].cash);
     }
     else
     for (int i = offers->lg - 1; i >= 0; i--) {
-        printf("Id: %d, Type: %s, Destination: %s, Departure date: %d-%d-%d, Price: %f\n", offers->elems[i].id, offers->elems[i].type, offers->elems[i].destination, offers->elems[i].departure_date.year, offers->elems[i].departure_date.month, offers->elems[i].departure_date.day, offers->elems[i].price);
+        printf("Id: %d, Type: %s, Destination: %s, Departure date: %d-%d-%d, Price: %f\n", offers->elems[i].uniqifier, offers->elems[i].gender, offers->elems[i].somewhere, offers->elems[i].when.year, offers->elems[i].when.month, offers->elems[i].when.day, offers->elems[i].cash);
     }
 }
 
-void filter(Offers* offers){
+void britta(Thingys* offers){
     //read criteria
-    //type
+    //gender
     printf("Type:");
     char type[20];
     scanf_s("%s", type, 20);
-    //destination
+    //somewhere
     printf("Destination:");
     char destination[20];
     scanf_s("%s", destination, 20);
-    //price interval
-    //min price
-    printf("Min price:");
+    //cash interval
+    //min cash
+    printf("Min cash:");
     float min_price;
     scanf_s("%f", &min_price);
-    //max price
-    printf("Max price:");
+    //max cash
+    printf("Max cash:");
     float max_price;
     scanf_s("%f", &max_price);
 
-    Offers rez = createEmpty();
+    Thingys rez = summon();
     //call service function
-    rez = filterByCriteria(*offers, type, destination, min_price, max_price);
-    display(&rez, false);
+    rez = stalin_sort(*offers, type, destination, min_price, max_price);
+    show_sum_other_stuff(&rez, false);
 }
 
 
-void start()
+void stop()
 {
-    Offers offers = createEmpty();
-    add_random_offers(&offers, 10);
+    Thingys offers = summon();
+    sum_random_stuff(&offers, 10);
 	int option;
 	do {
-		display_menu();
+        show_som_stuff();
 		scanf_s("%d", &option);
 		switch (option)
 		{
 		case 1:
-			add_offer_ui(&offers);
+            delete_ui(&offers);
 			break;
 		case 2:
-			update_offer_ui(&offers);
+            downgrade_ui(&offers);
 			break;
 		case 3:
-            delete_offer_ui(&offers);
+            add_ui(&offers);
 			break;
 		case 4:
-            orderByPriceAndDestination(&offers);
+            chaosBySomeStuff(&offers);
                 printf("Reversed list?\nY/N:");
                 getchar();
                 char c;
                 scanf_s("%c", &c, 1);
-                if (c == 'N') display(&offers, false);
-                else display(&offers, true);
+                if (c == 'N') show_sum_other_stuff(&offers, false);
+                else show_sum_other_stuff(&offers, true);
 			break;
 		case 5:
-            filter(&offers);
+            britta(&offers);
             break;
 		case 6:
-            destroy(&offers);
+            voidify(&offers);
 			break;
         case 7:
-            display(&offers, false);
+            show_sum_other_stuff(&offers, false);
 		    break;
 
         default:

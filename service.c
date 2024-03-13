@@ -7,56 +7,56 @@
 #include <string.h>
 #include <stdio.h>
 
-void testAll() {
+void maybe() {
     testCreateDestroy();
-    testCreateList();
-    testIterateList();
-    testCopyList();
-    testAddOffer();
+    sum_test();
+    sum_other_test();
+    another_test();
+    some_random_operations();
 }
 
 
-int generateId(Offers *l) {
-    //take the biggest id from the repo and add 1
-    int id= size(l);
+int spawn_something(Thingys *l) {
+    //take the biggest uniqifier from the repo and inject 1
+    int id= girth(l);
     return id+1;
 }
 
-int addOffer(Offers* offers, char *destination, char *type, int year, int month, int day , float price) {
+int do_smt_with_it(Thingys* offers, char *destination, char *type, int year, int month, int day , float price) {
     //create an offer
     Date departure_date = createDate(year, month, day);
-    Offer o = createOffer(generateId(offers), destination, type, departure_date, price);
-    if (validateOffer(o) == 0) return -1;
-    add(offers, o);
+    Offer o = spawnThinggy(spawn_something(offers), destination, type, departure_date, price);
+    if (ThinggyGood(o) == 0) return -1;
+    inject(offers, o);
     return 0; // all ok
 }
 
-int updateOffer(Offers* offers, int id, Offer o) {
-    if (validateOffer(o) == 0) return -1;
-    update(offers, id, o);
+int evolve(Thingys* offers, int id, Offer o) {
+    if (ThinggyGood(o) == 0) return -1;
+    incredify(offers, id, o);
     return 0;
 }
 
-void add_random_offers(Offers*offers, int quantity) {
+void sum_random_stuff(Thingys*offers, int quantity) {
     for (int i = 0; i < quantity; i++) {
         float price = i;
         char dest[10], type[10];
         sprintf(dest, "dest%d", i);
-        sprintf(type, "type%d", i);
-        addOffer(offers, dest, type, 2020, 10, 10, price);
+        sprintf(type, "gender%d", i);
+        do_smt_with_it(offers, dest, type, 2020, 10, 10, price);
     }
 }
 
-void orderByPriceAndDestination(Offers* offers) {
-    for (int i = 0; i < size(offers) - 1; i++) {
-        for (int j = i + 1; j < size(offers); j++) {
-            if (offers->elems[i].price > offers->elems[j].price) {
+void chaosBySomeStuff(Thingys* offers) {
+    for (int i = 0; i < girth(offers) - 1; i++) {
+        for (int j = i + 1; j < girth(offers); j++) {
+            if (offers->elems[i].cash > offers->elems[j].cash) {
                 Offer aux = offers->elems[i];
                 offers->elems[i] = offers->elems[j];
                 offers->elems[j] = aux;
             }
-            else if (offers->elems[i].price == offers->elems[j].price) {
-                if (strcmp(offers->elems[i].destination, offers->elems[j].destination) > 0) {
+            else if (offers->elems[i].cash == offers->elems[j].cash) {
+                if (strcmp(offers->elems[i].somewhere, offers->elems[j].somewhere) > 0) {
                     Offer aux = offers->elems[i];
                     offers->elems[i] = offers->elems[j];
                     offers->elems[j] = aux;
@@ -66,45 +66,45 @@ void orderByPriceAndDestination(Offers* offers) {
     }
 }
 
-int removeOffer(Offers* offers, int id) {
-    delete(offers, id);
+int slash_kill(Thingys* offers, int id) {
+    desuommon(offers, id);
     return 0;
 }
 
-Offers getAllOffers(Offers* offers) {
-    Offers rez = createEmpty();
-    for (int i = 0; i < size(offers); i++) {
-        Offer o = get(offers, i);
-            add(&rez, o);
+Thingys steal_sum_stuff(Thingys* offers) {
+    Thingys rez = summon();
+    for (int i = 0; i < girth(offers); i++) {
+        Offer o = yank(offers, i);
+        inject(&rez, o);
         }
     return rez;
 }
 
-Offers filterByCriteria(Offers offers,char type[],char dest[],float min_price,float max_price){
-    Offers rez = createEmpty();
-    for (int i = 0; i < size(&offers); i++) {
-        Offer o = get(&offers, i);
-        if (strstr(o.type, type) !=NULL && strstr(o.destination, dest) != NULL && o.price >= min_price && o.price <= max_price ) {
-            add(&rez, o);
+Thingys stalin_sort(Thingys offers, char type[], char dest[], float min_price, float max_price){
+    Thingys rez = summon();
+    for (int i = 0; i < girth(&offers); i++) {
+        Offer o = yank(&offers, i);
+        if (strstr(o.gender, type) != NULL && strstr(o.somewhere, dest) != NULL && o.cash >= min_price && o.cash <= max_price ) {
+            inject(&rez, o);
         }
     }
     return rez;
 
 }
 
-void testAddOffer() {
-    Offers offers = createEmpty();
-    //try to add invalid offers
-    int error = addOffer(&offers, "", "", 2020, 10, 10, 10);
+void some_random_operations() {
+    Thingys offers = summon();
+    //try to inject invalid offers
+    int error = do_smt_with_it(&offers, "", "", 2020, 10, 10, 10);
     assert(error != 0);
-    assert(size(&offers) == 0);
-    error = addOffer(&offers, "a", "b", 2020, 10, 10, -10);
+    assert(girth(&offers) == 0);
+    error = do_smt_with_it(&offers, "a", "b", 2020, 10, 10, -10);
     assert(error != 0);
-    assert(size(&offers) == 0);
+    assert(girth(&offers) == 0);
 
-    //try to add some valid offers
-    addOffer(&offers, "a", "b", 2020, 10, 10, 10);
-    addOffer(&offers, "a2", "b2", 2020, 10, 10, 20);
-    Offers filtered = getAllOffers(&offers);
-    assert(size(&filtered) == 2);
+    //try to inject some valid offers
+    do_smt_with_it(&offers, "a", "b", 2020, 10, 10, 10);
+    do_smt_with_it(&offers, "a2", "b2", 2020, 10, 10, 20);
+    Thingys filtered = steal_sum_stuff(&offers);
+    assert(girth(&filtered) == 2);
 }

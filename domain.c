@@ -34,15 +34,15 @@ int validateDate(Date d) // kinda overengineered instead of just using linux tim
         return (d.day > 0 && d.day <= 30);
 }
 
-Offer createOffer(int id,char *destination, char *type, Date departure_date, float price)
+Offer spawnThinggy(int id, char *destination, char *type, Date departure_date, float price)
 {
     //a simple function that creates an offer
     Offer o;
-    o.id = id;
-    strcpy_s(o.destination,sizeof(o.destination), destination);
-    strcpy_s(o.type,sizeof(o.type), type);
-    o.departure_date = departure_date;
-    o.price = price;
+    o.uniqifier = id;
+    strcpy_s(o.somewhere, sizeof(o.somewhere), destination);
+    strcpy_s(o.gender, sizeof(o.gender), type);
+    o.when = departure_date;
+    o.cash = price;
     return o;
 }
 
@@ -56,40 +56,40 @@ Date createDate(int year, int month, int day)
     return d;
 }
 
-void destroyOffer(Offer *o)
+void unsummonThinggy(Offer *o)
 {
     //no memory is allocated on the heap
     //nothing to dealocate
-    //mark that pet is destroyed, avoid accidental use after destroy
-    o->id = -1;
-    destroyDate(&o->departure_date);
-    o->price = -1;
-    o->destination[0] = '\0';
-    o->type[0] = '\0';
+    //mark that pet is destroyed, avoid accidental use after voidify
+    o->uniqifier = -1;
+    destroyDate(&o->when);
+    o->cash = -1;
+    o->somewhere[0] = '\0';
+    o->gender[0] = '\0';
 }
 
 void destroyDate(Date *d)
 {
     //no memory is allocated on the heap
     //nothing to dealocate
-    //mark that pet is destroyed, avoid accidental use after destroy
+    //mark that pet is destroyed, avoid accidental use after voidify
     d->year = -1;
     d->month = -1;
     d->day = -1;
 }
 
-int validateOffer(Offer o)
+int ThinggyGood(Offer o)
 {
     //a simple function that validates an offer
-    if (o.id < 0)
+    if (o.uniqifier < 0)
         return 0;
-    if (o.price < 0)
+    if (o.cash < 0)
         return 0;
-    if (strlen(o.destination) == 0)
+    if (strlen(o.somewhere) == 0)
         return 0;
-    if (strlen(o.type) == 0)
+    if (strlen(o.gender) == 0)
         return 0;
-    if (validateDate(o.departure_date) == 0)
+    if (validateDate(o.when) == 0)
         return 0;
     return 1;
 }
@@ -97,23 +97,23 @@ int validateOffer(Offer o)
 
 
 void testCreateDestroy() {
-    Offer o = createOffer(1, "a", "b", createDate(2020, 10, 10), 10);
-    assert(o.id == 1);
-    assert(strcmp(o.destination, "a") == 0);
-    assert(strcmp(o.type, "b") == 0);
-    assert(o.departure_date.year == 2020);
-    assert(o.departure_date.month == 10);
-    assert(o.departure_date.day == 10);
-    assert(o.price == 10);
+    Offer o = spawnThinggy(1, "a", "b", createDate(2020, 10, 10), 10);
+    assert(o.uniqifier == 1);
+    assert(strcmp(o.somewhere, "a") == 0);
+    assert(strcmp(o.gender, "b") == 0);
+    assert(o.when.year == 2020);
+    assert(o.when.month == 10);
+    assert(o.when.day == 10);
+    assert(o.cash == 10);
 
-    destroyOffer(&o);
-    assert(o.id == -1);
-    assert(o.departure_date.year == -1);
-    assert(o.departure_date.month == -1);
-    assert(o.departure_date.day == -1);
-    assert(o.price == -1);
-    assert(o.destination[0] == '\0');
-    assert(o.type[0] == '\0');
+    unsummonThinggy(&o);
+    assert(o.uniqifier == -1);
+    assert(o.when.year == -1);
+    assert(o.when.month == -1);
+    assert(o.when.day == -1);
+    assert(o.cash == -1);
+    assert(o.somewhere[0] == '\0');
+    assert(o.gender[0] == '\0');
 }
 
 int cmp_date(Date a, Date b)

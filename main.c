@@ -18,6 +18,6 @@ Aplicatia permite:
 
 int main()
 {
-    testAll();
-	start();
+    maybe();
+    stop();
 } // where test and layered arhitecture

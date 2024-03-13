@@ -8,17 +8,17 @@ typedef struct{
 
 //define struct offer
 typedef struct{
-    int id;
-    char destination[100];
-    char type[100];
-    Date departure_date;
-    float price;
+    int uniqifier;
+    char somewhere[100];
+    char gender[100];
+    Date when;
+    float cash;
 }Offer;
 
-Offer createOffer(int id,char* destination, char* type, Date departure_date, float price);
+Offer spawnThinggy(int id, char* destination, char* type, Date departure_date, float price);
 Date createDate(int year, int month, int day);
 
-void destroyOffer(Offer* o);
+void unsummonThinggy(Offer* o);
 
 void destroyDate(Date* d);
 
@@ -28,7 +28,7 @@ void testCreateDestroy();
 
 int validateDate(Date d);
 
-int validateOffer(Offer o);
+int ThinggyGood(Offer o);
 
 int compareDates(Date a, Date b);
 
