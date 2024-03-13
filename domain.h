@@ -1,15 +1,33 @@
 #pragma once
-typedef struct date
-{
-	int day;
-	int month;
-	int year;
-}date;
+//define struct date
+typedef struct{
+    int year;
+    int month;
+    int day;
+}Date;
 
-typedef struct offer
-{
-	char tip[256];
-	char destinatie[256]; // why the variable in romanian?
-	date data;
-	float pret;
-}offer;
+//define struct offer
+typedef struct{
+    int id;
+    char destination[100];
+    char type[100];
+    Date departure_date;
+    int price;
+}Offer;
+
+Offer createOffer(char* destination, char* type, Date departure_date, int price);
+Date createDate(int year, int month, int day);
+
+void destroyOffer(Offer* o);
+
+void destroyDate(Date* d);
+
+void testCreateOffer();
+
+int validateDate(Date d);
+
+int validateOffer(Offer o);
+
+int compareDates(Date a, Date b);
+
+int cmp_date(Date a, Date b);

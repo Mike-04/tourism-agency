@@ -1,3 +1,6 @@
+#include "ui.h"
+#include <stdio.h>
+
 void display_menu()
 {
 	printf("1. Add offer\n");
@@ -38,5 +41,4 @@ void start()
 			break;
 		}
 	} while (option != 6);
-	return 0;
 }
