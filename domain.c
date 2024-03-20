@@ -34,47 +34,51 @@
 //        return (d.day > 0 && d.day <= 30);
 //}
 
-Offer * createOffer(int id, char *destination, char *type, Date * departure_date, float price)
+Offer createOffer(int id, char destination[100], char type[100], Date departure_date, float price)
 {
     //a simple function that creates an offer
-    Offer * o = (Offer *)malloc(sizeof(Offer));
-    o->id = id;
-    o->destination = (char *)malloc(sizeof(char) * (strlen(destination) + 1));
-    strcpy_s(o->destination,sizeof(o->destination), destination);
-    o->type = (char *)malloc(sizeof(char) * (strlen(type) + 1));
-    strcpy_s(o->type,sizeof(o->type), type);
-    o->departure_date = departure_date;
-    o->price = price;
+    Offer o;
+    o.id = id;
+    o.type = (char *)malloc((strlen(type)+1)*sizeof(char));
+    strcpy(o.type, type);
+    o.destination = (char *)malloc((strlen(destination)+1)*sizeof(char));
+    strcpy(o.destination, destination);
+    o.departure_date = departure_date;
+    o.price = price;
     return o;
 }
 
-Date * createDate(int year, int month, int day)
+Date createDate(int year, int month, int day)
 {
     //a simple function that creates a date
-    Date * d = (Date *)malloc(sizeof(Date));
-    d->year = year;
-    d->month = month;
-    d->day = day;
+    Date d;
+    d.year = year;
+    d.month = month;
+    d.day = day;
     return d;
 }
 
 void destroyOffer(Offer *o)
 {
     //dealocate offer
-    printf("destroying date\n");
-    destroyDate(o->departure_date);
-    printf("destroying offer\n");
+    //printf("Id:%d Destination:%s Type:%s Departure date:%d-%d-%d Price:%.2f\n", o->id, o->destination, getType(o), o->departure_date.year, o->departure_date.month, o->departure_date.day, o->price);
+    if (o == NULL)
+        return;
+    o->departure_date.year = -1;
+    o->departure_date.month = -1;
+    o->departure_date.day = -1;
+    o->id = -1;
+    o->price = -1;
+    strcpy(o->destination, "\0");
+    strcpy(o->type, "\0");
     free(o->destination);
     free(o->type);
-    printf("destroying strings\n");
-    free(o);
-    printf("destroyed\n");
+
 }
 
 void destroyDate(Date *d)
 {
     //dealocate date
-    free(d);
 }
 
 //getters and setters for offer
@@ -95,7 +99,7 @@ char *getDestination(Offer *o)
 }
 int setDestination(Offer *o, char *destination)
 {
-    strcpy_s(o->destination,sizeof(o->destination), destination);
+    strcpy(o->destination, destination);
     return 0;
 }
 
@@ -105,15 +109,14 @@ char *getType(Offer *o)
 }
 int setType(Offer *o, char *type)
 {
-    strcpy_s(o->type,sizeof(o->type), type);
+    strcpy(o->type, type);
     return 0;
 }
 
-Date *getDepartureDate(Offer *o)
-{
+Date getDepartureDate(Offer *o){
     return o->departure_date;
 }
-int setDepartureDate(Offer *o, Date *departure_date)
+int setDepartureDate(Offer *o, Date departure_date)
 {
     o->departure_date = departure_date;
     return 0;
@@ -130,41 +133,42 @@ int setPrice(Offer *o, float price)
 }
 
 //validate offer
-int validateOffer(Offer *o)
+int validateOffer(Offer o)
 {
     //a simple function that validates an offer
-    if (o->id < 0)
+    if (o.id < 0)
         return 0;
-    if (strlen(o->destination) == 0)
+    if (strlen(o.destination) == 0)
         return 0;
-    if (strlen(o->type) == 0)
+    if (strlen(o.type) == 0)
         return 0;
-    if (o->departure_date->year < 0)
+    if (o.departure_date.year < 0)
         return 0;
-    if (o->departure_date->month < 0)
+    if (o.departure_date.month < 0)
         return 0;
-    if (o->departure_date->day < 0)
+    if (o.departure_date.day < 0)
         return 0;
-    if (o->price < 0)
+    if (o.price < 0)
         return 0;
     return 1;
 }
 
 
 void testCreateDestroy() {
-    Date * d = createDate(2020, 10, 10);
-    assert(d->year == 2020);
-    assert(d->month == 10);
-    assert(d->day == 10);
-    destroyDate(d);
-    Offer * o = createOffer(1, "a", "b", createDate(2020, 10, 10), 10);
-    assert(getId(o) == 1);
-    assert(strcmp(getDestination(o), "a") == 0);
-    assert(strcmp(getType(o), "b") == 0);
-    assert(getDepartureDate(o)->year == 2020);
-    assert(getDepartureDate(o)->month == 10);
-    assert(getDepartureDate(o)->day == 10);
-    assert(getPrice(o) == 10);
-    destroyOffer(o);
-
+    Date d = createDate(2020, 10, 10);
+    assert(d.year == 2020);
+    assert(d.month == 10);
+    assert(d.day == 10);
+    destroyDate(&d);
+    //printf("destroyed date\n");
+    Offer o = createOffer(1, "a", "b", createDate(2020, 10, 10), 10);
+    assert(getId(&o) == 1);
+    assert(strcmp(getDestination(&o), "a") == 0);
+    assert(strcmp(getType(&o), "b") == 0);
+    assert(getDepartureDate(&o).year == 2020);
+    assert(getDepartureDate(&o).month == 10);
+    assert(getDepartureDate(&o).day == 10);
+    assert(getPrice(&o) == 10);
+    destroyOffer(&o);
+    //printf("destroyed offer\n");
 }
