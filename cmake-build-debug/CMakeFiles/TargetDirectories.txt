@@ -1,3 +1,3 @@
-C:/Users/proga/Documents/OOP/Lab2-4/cmake-build-debug/CMakeFiles/Lab2_4.dir
-C:/Users/proga/Documents/OOP/Lab2-4/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/proga/Documents/OOP/Lab2-4/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/White Fox/CLionProjects/tourism-agency/cmake-build-debug/CMakeFiles/Lab2_4.dir
+C:/Users/White Fox/CLionProjects/tourism-agency/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/White Fox/CLionProjects/tourism-agency/cmake-build-debug/CMakeFiles/rebuild_cache.dir

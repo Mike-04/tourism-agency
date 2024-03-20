@@ -1,6 +1,7 @@
 #include "ui.h"
 #include "repo.h"
 #include "service.h"
+#include "domain.h"
 #include <stdio.h>
 #include <stdbool.h>
 
@@ -61,7 +62,8 @@ void update_offer_ui(Offers *l)
     printf("Price:");
     float price;
     scanf_s("%f", &price);
-    Offer o = createOffer(id, destination, type, createDate(year, month, day), price);
+    Date * d = createDate(year, month, day);
+    Offer * o = createOffer(id, destination, type, d, price);
     updateOffer(l, id, o);
 }
 
@@ -74,14 +76,19 @@ void delete_offer_ui(Offers *l)
 }
 
 void display(Offers* offers, bool reversed) {
-    if (reversed==false)
-    for (int i = 0; i < offers->lg; i++) {
-        printf("Id: %d, Type: %s, Destination: %s, Departure date: %d-%d-%d, Price: %f\n", offers->elems[i].id, offers->elems[i].type, offers->elems[i].destination, offers->elems[i].departure_date.year, offers->elems[i].departure_date.month, offers->elems[i].departure_date.day, offers->elems[i].price);
+    //display all offers
+    if (reversed == false) {
+        for (int i = 0; i < size(offers); i++) {
+            printf("Id:%d Destination:%s Type:%s Departure date:%d-%d-%d Price:%.2f\n", offers->elems[i].id, offers->elems[i].destination, getType(&offers->elems[i]), offers->elems[i].departure_date->year, offers->elems[i].departure_date->month, offers->elems[i].departure_date->day, offers->elems[i].price);
+        }
     }
-    else
-    for (int i = offers->lg - 1; i >= 0; i--) {
-        printf("Id: %d, Type: %s, Destination: %s, Departure date: %d-%d-%d, Price: %f\n", offers->elems[i].id, offers->elems[i].type, offers->elems[i].destination, offers->elems[i].departure_date.year, offers->elems[i].departure_date.month, offers->elems[i].departure_date.day, offers->elems[i].price);
+    else {
+        for (int i = size(offers) - 1; i >= 0; i--) {
+            printf("Id:%d Destination:%s Type:%s Departure date:%d-%d-%d Price:%.2f\n", offers->elems[i].id, offers->elems[i].destination, getType(&offers->elems[i]), offers->elems[i].departure_date->year, offers->elems[i].departure_date->month, offers->elems[i].departure_date->day, offers->elems[i].price);
+        }
     }
+
+
 }
 
 void filter(Offers* offers){
@@ -104,17 +111,18 @@ void filter(Offers* offers){
     float max_price;
     scanf_s("%f", &max_price);
 
-    Offers rez = createEmpty();
+    Offers * rez;
     //call service function
-    rez = filterByCriteria(*offers, type, destination, min_price, max_price);
-    display(&rez, false);
+    rez = filterByCriteria(offers, type, destination, min_price, max_price);
+    display(rez, false);
+    printf("ok");
 }
 
 
 void start()
 {
-    Offers offers = createEmpty();
-    add_random_offers(&offers, 10);
+    Offers * offers = createEmpty();
+    add_random_offers(offers, 2);
 	int option;
 	do {
 		display_menu();
@@ -122,31 +130,30 @@ void start()
 		switch (option)
 		{
 		case 1:
-			add_offer_ui(&offers);
+			add_offer_ui(offers);
 			break;
 		case 2:
-			update_offer_ui(&offers);
+			update_offer_ui(offers);
 			break;
 		case 3:
-            delete_offer_ui(&offers);
+            delete_offer_ui(offers);
 			break;
 		case 4:
-            orderByPriceAndDestination(&offers);
+            orderByPriceAndDestination(offers);
                 printf("Reversed list?\nY/N:");
                 getchar();
                 char c;
                 scanf_s("%c", &c, 1);
-                if (c == 'N') display(&offers, false);
-                else display(&offers, true);
+                if (c == 'N') display(offers, true);
+                else display(offers, false);
 			break;
 		case 5:
-            filter(&offers);
+            filter(offers);
             break;
-		case 6:
-            destroy(&offers);
+    	case 6:
 			break;
         case 7:
-            display(&offers, false);
+            display_repo(offers);
 		    break;
 
         default:
@@ -154,4 +161,5 @@ void start()
 			break;
 		}
 	} while (option != 6);
+    destroy(offers);
 }

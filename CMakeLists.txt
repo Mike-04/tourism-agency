@@ -14,4 +14,5 @@ add_executable(Lab2_4
         service.c
         service.h
         ui.c
-        ui.h)
+        ui.h
+)

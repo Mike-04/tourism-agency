@@ -1,48 +1,29 @@
 #pragma once
 #include "domain.h"
-typedef Offer ElemType;
+
 typedef struct {
-    ElemType elems[50];
-    int lg;
+    Offer* elems;
+    int size;
+    int max_size;
 } Offers;
 
 /*
   Create an empty list
 */
-Offers createEmpty();
+Offers* createEmpty();
 
-/*
-  Destroy list
-*/
 void destroy(Offers* offers);
 
-/*
-  Get an element from the list
-  poz - position of the element, need to be valid
-  return element on the given position
-*/
-ElemType get(Offers* offers, int poz);
 
-/*
-  return number of elements in the list
-*/
+void add(Offers* offers, Offer * el);
+
 int size(Offers* offers);
-
-/*
-  Add element into the list
-  post: element is added to the end of the list
-*/
-void add(Offers* offers, ElemType el);
-
-/*
-  Make a shallow copy of the list
-  return Mylist containing the same elements as offers
-*/
-Offers copyList(Offers* offers);
 
 void delete(Offers* offers, int poz);
 
-void update(Offers* offers, int poz, ElemType el);
+void update(Offers* offers, int poz, Offer * el);
+
+void display_repo(Offers* offers);
 
 void testCreateList();
 void testIterateList();

@@ -19,5 +19,6 @@ Aplicatia permite:
 int main()
 {
     testAll();
-	start();
+	//start();
+    return 0;
 } // where test and layered arhitecture

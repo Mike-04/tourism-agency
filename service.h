@@ -11,9 +11,9 @@ int addOffer(Offers* offers, char *destination, char *type, int year, int month,
   typeSubstring - cstring
   return all pets where typeSubstring is a substring of the type
 */
-Offers getAllOffers(Offers* offers);
+//Offers getAllOffers(Offers* offers);
 
-int updateOffer(Offers* offers, int id, Offer o);
+int updateOffer(Offers* offers, int id, Offer *o);
 
 int removeOffer(Offers* offers, int id);
 
@@ -23,7 +23,7 @@ void add_random_offers(Offers* offers, int quantity);
 
 void display(Offers* offers, bool reversed);
 
-Offers filterByCriteria(Offers offers,char type[],char dest[],float min_price,float max_price);
+Offers * filterByCriteria(Offers * offers, char type[], char dest[], float min_price, float max_price);
 
 void testAll();
 
