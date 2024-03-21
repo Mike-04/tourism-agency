@@ -5,9 +5,13 @@
 
 int addOffer(Offers* offers, char destination[100], char type[100], int year, int month, int day, float price);
 
-int updateOffer(Offers* offers, int id, Offer o);
+int updateOffer(Offers* offers, int id, char destination[100], char type[100], int year, int month, int day, float price);
 
 int removeOffer(Offers* offers, int id);
+
+int function(Offer* o1, Offer* o2);
+
+void sort(Offers* offers, int (function(Offer*, Offer*)));
 
 void orderByPriceAndDestination(Offers* offers);
 

@@ -1,0 +1,226 @@
+        -:    0:Source:/mnt/c/Users/proga/Documents/OOP/Lab2-4/repo.c
+        -:    0:Graph:/mnt/c/Users/proga/Documents/OOP/Lab2-4/cmake-build-debug-coverage/CMakeFiles/Lab2_4.dir/repo.c.gcno
+        -:    0:Data:/mnt/c/Users/proga/Documents/OOP/Lab2-4/cmake-build-debug-coverage/CMakeFiles/Lab2_4.dir/repo.c.gcda
+        -:    0:Runs:1
+        -:    1:#include "repo.h"
+        -:    2:
+        -:    3:#include <assert.h>
+        -:    4:#include <string.h>
+        -:    5:#include <stdio.h>
+        -:    6:#include <stdlib.h>
+        -:    7:
+function createEmpty called 9 returned 100% blocks executed 100%
+        9:    8:Offers createEmpty()
+        -:    9:{
+        -:   10:    //alocate memory
+        -:   11:    Offers offers;
+        9:   12:    offers.size = 0;
+        9:   13:    offers.max_size = 100;
+        9:   14:    offers.elems = malloc(100 * sizeof(Offer));
+        9:   15:    return offers;
+        9:   15-block  0
+        -:   16:}
+        -:   17:
+function destroy called 9 returned 100% blocks executed 100%
+        9:   18:void destroy(Offers * offers) {
+        -:   19:    //dealocate memory for every element
+        -:   20:    int i;
+      143:   21:    for (i = 0; i < offers->size; i++)
+        9:   21-block  0
+      143:   21-block  1
+branch  0 taken 134
+branch  1 taken 9 (fallthrough)
+        -:   22:    {
+      134:   23:        destroyOffer(&(offers->elems[i]));
+      134:   23-block  0
+call    0 returned 134
+        -:   24:    }
+        9:   25:    offers->size = 0;
+        9:   26:    offers->max_size = 0;
+        9:   27:    free(offers->elems);
+        9:   28:}
+        -:   29:
+function resize called 2 returned 100% blocks executed 100%
+        2:   30:void resize(Offers* offers) {
+        2:   31:    int new_size = offers->max_size * 2;
+        2:   32:    Offer* new_elems = malloc(new_size * sizeof(Offer));
+      102:   33:    for (int i = 0; i < offers->size; i++) {
+        2:   33-block  0
+      102:   33-block  1
+branch  0 taken 100
+branch  1 taken 2 (fallthrough)
+      100:   34:        new_elems[i] = offers->elems[i];
+      100:   34-block  0
+        -:   35:    }
+        2:   36:    free(offers->elems);
+        2:   37:    offers->elems = new_elems;
+        2:   38:    offers->max_size = new_size;
+        2:   39:}
+        -:   40:
+        -:   41:
+function size called 70 returned 100% blocks executed 100%
+       70:   42:int size(Offers* offers) {
+       70:   43:    return offers->size;
+       70:   43-block  0
+        -:   44:}
+        -:   45:
+        -:   46:
+        -:   47:
+function add called 136 returned 100% blocks executed 100%
+      136:   48:void add(Offers *offers, Offer el) {
+      136:   49:    if (offers->size == offers->max_size) {
+      136:   49-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 135
+        1:   50:        resize(offers);
+        1:   50-block  0
+call    0 returned 1
+        -:   51:    }
+      136:   52:    offers->elems[offers->size] = el;
+      136:   53:    offers->size++;
+      136:   54:}
+        -:   55:
+function delete called 3 returned 100% blocks executed 92%
+        3:   56:void delete(Offers* offers, int id) {
+        3:   57:    if (id < 0)
+        3:   57-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 2
+        1:   58:        return;
+        1:   58-block  0
+        -:   59:    int i;
+       2*:   60:    for (i = 0; i < offers->size; i++) {
+        2:   60-block  0
+    %%%%%:   60-block  1
+        2:   60-block  2
+branch  0 taken 2
+branch  1 taken 0 (fallthrough)
+        2:   61:        if (offers->elems[i].id == id) {
+        2:   61-block  0
+branch  0 taken 2 (fallthrough)
+branch  1 taken 0
+        2:   62:            destroyOffer(&offers->elems[i]);
+        2:   62-block  0
+call    0 returned 2
+        4:   63:            for (int j = i; j < offers->size - 1; j++) {
+        4:   63-block  0
+branch  0 taken 2
+branch  1 taken 2 (fallthrough)
+        2:   64:                offers->elems[j] = offers->elems[j + 1];
+        2:   64-block  0
+        -:   65:            }
+        2:   66:            offers->size--;
+        2:   67:            return;
+        2:   67-block  0
+        -:   68:        }
+        -:   69:    }
+        -:   70:
+        -:   71:}
+        -:   72:
+function update called 1 returned 100% blocks executed 86%
+        1:   73:void update(Offers* offers, int id, Offer el) {
+       1*:   74:    for (int i = 0; i < offers->size; i++) {
+        1:   74-block  0
+    %%%%%:   74-block  1
+        1:   74-block  2
+branch  0 taken 1
+branch  1 taken 0 (fallthrough)
+        1:   75:        if (offers->elems[i].id == id) {
+        1:   75-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+        1:   76:            destroyOffer(&offers->elems[i]);
+        1:   76-block  0
+call    0 returned 1
+        1:   77:            offers->elems[i] = el;
+        1:   78:            return;
+        -:   79:        }
+        -:   80:    }
+        -:   81:}
+        -:   82:
+function get called 1 returned 100% blocks executed 100%
+        1:   83:Offer get(Offers* offers, int poz) {
+        1:   84:    return offers->elems[poz];
+        1:   84-block  0
+        -:   85:}
+        -:   86:
+        -:   87:
+        -:   88://
+        -:   89://void display_repo(Offers* offers) {
+        -:   90://    for (int i = 0; i < offers->size; i++) {
+        -:   91://        printf("Id:%d Destination:%s Type:%s Departure date:%d-%d-%d Price:%.2f\n", offers->elems[i].id, offers->elems[i].destination, offers->elems[i].type, offers->elems[i].departure_date.year, offers->elems[i].departure_date.month, offers->elems[i].departure_date.day, offers->elems[i].price);
+        -:   92://    }
+        -:   93://}
+        -:   94:
+function testCreateList called 1 returned 100% blocks executed 86%
+        1:   95:void testCreateList() {
+        1:   96:    Offers offers = createEmpty();
+        1:   96-block  0
+call    0 returned 1
+        1:   97:    resize(&offers);
+call    0 returned 1
+       1*:   98:    assert(size(&offers) == 0);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:   98-block  0
+call    3 never executed
+        1:   99:    destroy(&offers);
+        1:   99-block  0
+call    0 returned 1
+        1:  100:}
+        -:  101:
+function testIterateList called 1 returned 100% blocks executed 88%
+        1:  102:void testIterateList() {
+        1:  103:    Offers offers = createEmpty();
+        1:  103-block  0
+call    0 returned 1
+        1:  104:    add(&offers, createOffer(1, "a", "b", createDate(2020, 10, 10), 10));
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+        1:  105:    add(&offers, createOffer(2, "c", "d", createDate(2020, 10, 10), 10));
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+       1*:  106:    assert(size(&offers) == 2);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  106-block  0
+call    3 never executed
+        1:  107:    delete(&offers, 1);
+        1:  107-block  0
+call    0 returned 1
+        1:  108:    delete(&offers, -1);
+call    0 returned 1
+        -:  109:    Offer offer;
+        1:  110:    offer = get(&offers, 0);
+call    0 returned 1
+       1*:  111:    assert(offer.id == 2);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    %%%%%:  111-block  0
+call    2 never executed
+       1*:  112:    assert(size(&offers) == 1);
+        1:  112-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  112-block  1
+call    3 never executed
+      103:  113:    for(int i = 0; i < 102; i++) {
+        1:  113-block  0
+      103:  113-block  1
+branch  0 taken 102
+branch  1 taken 1 (fallthrough)
+      102:  114:        add(&offers, createOffer(i, "a", "b", createDate(2020, 10, 10), 10));
+      102:  114-block  0
+call    0 returned 102
+call    1 returned 102
+call    2 returned 102
+        -:  115:    }
+        1:  116:    destroy(&offers);
+        1:  116-block  0
+call    0 returned 1
+        1:  117:}

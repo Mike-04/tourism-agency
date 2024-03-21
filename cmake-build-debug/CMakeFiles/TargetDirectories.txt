@@ -1,3 +1,3 @@
-/mnt/c/Users/White Fox/CLionProjects/tourism-agency/cmake-build-debug/CMakeFiles/Lab2_4.dir
-/mnt/c/Users/White Fox/CLionProjects/tourism-agency/cmake-build-debug/CMakeFiles/edit_cache.dir
-/mnt/c/Users/White Fox/CLionProjects/tourism-agency/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/mnt/c/Users/proga/Documents/OOP/Lab2-4/cmake-build-debug/CMakeFiles/Lab2_4.dir
+/mnt/c/Users/proga/Documents/OOP/Lab2-4/cmake-build-debug/CMakeFiles/edit_cache.dir
+/mnt/c/Users/proga/Documents/OOP/Lab2-4/cmake-build-debug/CMakeFiles/rebuild_cache.dir

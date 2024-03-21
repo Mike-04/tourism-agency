@@ -16,3 +16,5 @@ add_executable(Lab2_4
         ui.c
         ui.h
 )
+
+TARGET_COMPILE_OPTIONS(Lab2_4 PRIVATE -Wall -Wextra -pedantic -Wno-unused-parameter -Wno-unused-variable -Wno-unused-but-set-variable -Wno-unused-function -Wno-unused-value -Wno-unused-const-variable -Wno-unused-label -Wno-unused-local-typedefs -Wno-unused-macros -Wno-unused-result)

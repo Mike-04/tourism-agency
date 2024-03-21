@@ -1,0 +1,476 @@
+        -:    0:Source:/mnt/c/Users/proga/Documents/OOP/Lab2-4/service.c
+        -:    0:Graph:/mnt/c/Users/proga/Documents/OOP/Lab2-4/cmake-build-debug-coverage/CMakeFiles/Lab2_4.dir/service.c.gcno
+        -:    0:Data:/mnt/c/Users/proga/Documents/OOP/Lab2-4/cmake-build-debug-coverage/CMakeFiles/Lab2_4.dir/service.c.gcda
+        -:    0:Runs:1
+        -:    1:#include "domain.h"
+        -:    2:#include "service.h"
+        -:    3:#include "repo.h"
+        -:    4:#include <string.h>
+        -:    5:#include <assert.h>
+        -:    6:
+        -:    7:
+function testAll called 1 returned 100% blocks executed 100%
+        1:    8:void testAll() {
+        1:    9:    testCreateDestroy();
+        1:    9-block  0
+call    0 returned 1
+        1:   10:     testCreateList();
+call    0 returned 1
+        1:   11:     testIterateList();
+call    0 returned 1
+        1:   12:     testAddOffer();
+call    0 returned 1
+        1:   13:}
+        -:   14:
+        -:   15:
+function generateId called 38 returned 100% blocks executed 100%
+       38:   16:int generateId(Offers *l) {
+        -:   17:    //take the biggest id from the repo and add 1
+       38:   18:    int id = size(l);
+       38:   18-block  0
+call    0 returned 38
+       38:   19:    return id+1;
+        -:   20:}
+        -:   21:
+function addOffer called 38 returned 100% blocks executed 100%
+       38:   22:int addOffer(Offers* offers, char destination[100], char type[100], int year, int month, int day , float price) {
+       38:   23:    Date d = createDate(year, month, day);
+       38:   23-block  0
+call    0 returned 38
+       38:   24:    Offer o = createOffer(generateId(offers), destination, type, d, price);
+call    0 returned 38
+call    1 returned 38
+       38:   25:    if (validateOffer(o) == 0)
+call    0 returned 38
+branch  1 taken 8 (fallthrough)
+branch  2 taken 30
+        -:   26:    {
+        8:   27:        destroyOffer(&o);
+        8:   27-block  0
+call    0 returned 8
+        8:   28:        return -1;
+        -:   29:    }
+       30:   30:    add(offers, o);
+       30:   30-block  0
+call    0 returned 30
+       30:   31:    return 0;
+        -:   32:}
+        -:   33:
+function updateOffer called 2 returned 100% blocks executed 100%
+        2:   34:int updateOffer(Offers* offers, int id, char destination[100], char type[100], int year, int month, int day , float price) {
+        2:   35:    Date d = createDate(year, month, day);
+        2:   35-block  0
+call    0 returned 2
+        2:   36:    Offer o = createOffer(id, destination, type, d, price);
+call    0 returned 2
+        2:   37:    if (validateOffer(o) == 0)
+call    0 returned 2
+branch  1 taken 1 (fallthrough)
+branch  2 taken 1
+        -:   38:    {
+        1:   39:        destroyOffer(&o);
+        1:   39-block  0
+call    0 returned 1
+        1:   40:        return -1;
+        -:   41:    }
+        1:   42:    update(offers, id, o);
+        1:   42-block  0
+call    0 returned 1
+        -:   43:
+        1:   44:    return 0;
+        -:   45:}
+        -:   46:
+function add_random_offers called 2 returned 100% blocks executed 100%
+        2:   47:void add_random_offers(Offers*offers, int quantity) {
+       22:   48:for (int i = 0; i < quantity; i++) {
+        2:   48-block  0
+       22:   48-block  1
+branch  0 taken 20
+branch  1 taken 2 (fallthrough)
+        -:   49:        char type[100],dest[100];
+       20:   50:        strcpy(type,"b");
+       20:   51:        strcpy(dest,"a");
+       20:   52:        addOffer(offers, dest, type, 2020, 10, 10, i);
+       20:   52-block  0
+call    0 returned 20
+        -:   53:}
+        2:   54:}
+        -:   55:
+function function called 10 returned 100% blocks executed 100%
+       10:   56:int function(Offer* o1, Offer* o2) {
+        -:   57:    //price and destination
+       10:   58:    if (o1->price > o2->price)
+       10:   58-block  0
+branch  0 taken 3 (fallthrough)
+branch  1 taken 7
+        3:   59:        return 1;
+        3:   59-block  0
+        7:   60:    if (o1->price < o2->price)
+        7:   60-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 6
+        1:   61:        return -1;
+        1:   61-block  0
+        6:   62:    if (strcmp(o1->destination, o2->destination) > 0)
+        6:   62-block  0
+branch  0 taken 2 (fallthrough)
+branch  1 taken 4
+        2:   63:        return 1;
+        2:   63-block  0
+        4:   64:    if (strcmp(o1->destination, o2->destination) < 0)
+        4:   64-block  0
+branch  0 taken 3 (fallthrough)
+branch  1 taken 1
+        3:   65:        return -1;
+        3:   65-block  0
+        1:   66:    return 0;
+        1:   66-block  0
+        -:   67:}
+        -:   68:
+function sort called 1 returned 100% blocks executed 100%
+        1:   69:void sort(Offers * offers,int (function(Offer*,Offer* )))
+        -:   70:{
+        5:   71:    for (int i = 0; i < size(offers) - 1; i++) {
+        1:   71-block  0
+        4:   71-block  1
+        5:   71-block  2
+call    0 returned 5
+branch  1 taken 4
+branch  2 taken 1 (fallthrough)
+       14:   72:        for (int j = i + 1; j < size(offers); j++) {
+        4:   72-block  0
+       10:   72-block  1
+       14:   72-block  2
+call    0 returned 14
+branch  1 taken 10
+branch  2 taken 4 (fallthrough)
+       10:   73:            if (function(&offers->elems[i],&offers->elems[j]) > 0) {
+       10:   73-block  0
+call    0 returned 10
+branch  1 taken 5 (fallthrough)
+branch  2 taken 5
+        5:   74:                Offer aux = offers->elems[i];
+        5:   75:                offers->elems[i] = offers->elems[j];
+        5:   76:                offers->elems[j] = aux;
+        5:   76-block  0
+        -:   77:            }
+        -:   78:        }
+        -:   79:    }
+        1:   80:}
+        -:   81:
+        -:   82://void orderByPriceAndDestination(Offers* offers) {
+        -:   83://    for (int i = 0; i < size(offers) - 1; i++) {
+        -:   84://        for (int j = i + 1; j < size(offers); j++) {
+        -:   85://            if (offers->elems[i].price > offers->elems[j].price) {
+        -:   86://                Offer aux = offers->elems[i];
+        -:   87://                offers->elems[i] = offers->elems[j];
+        -:   88://                offers->elems[j] = aux;
+        -:   89://            }
+        -:   90://            else if (offers->elems[i].price == offers->elems[j].price) {
+        -:   91://                if (strcmp(offers->elems[i].destination, offers->elems[j].destination) > 0) {
+        -:   92://                    Offer aux = offers->elems[i];
+        -:   93://                    offers->elems[i] = offers->elems[j];
+        -:   94://                    offers->elems[j] = aux;}}}}}
+        -:   95:
+function removeOffer called 1 returned 100% blocks executed 100%
+        1:   96:int removeOffer(Offers* offers, int id) {
+        1:   97:    delete(offers, id);
+        1:   97-block  0
+call    0 returned 1
+        1:   98:    return 0;
+        -:   99:}
+        -:  100:
+function filterByCriteria called 1 returned 100% blocks executed 100%
+        1:  101:Offers filterByCriteria(Offers * offers, char type[], char dest[], float min_price, float max_price){
+        -:  102:    //filter the offers
+        1:  103:    Offers rez = createEmpty();
+        1:  103-block  0
+call    0 returned 1
+        4:  104:    for (int i = 0; i < size(offers); i++) {
+        3:  104-block  0
+        4:  104-block  1
+call    0 returned 4
+branch  1 taken 3
+branch  2 taken 1 (fallthrough)
+        6:  105:        if (strstr(getType(&offers->elems[i]),type) != NULL && strstr(getDestination(&offers->elems[i]), dest) != NULL &&
+        3:  105-block  0
+call    0 returned 3
+branch  1 taken 3 (fallthrough)
+branch  2 taken 0
+        3:  105-block  1
+call    3 returned 3
+branch  4 taken 3 (fallthrough)
+branch  5 taken 0
+branch  6 taken 3 (fallthrough)
+branch  7 taken 0
+        6:  106:                getPrice(&offers->elems[i]) >= min_price && getPrice(&offers->elems[i]) <= max_price) {
+        3:  106-block  0
+call    0 returned 3
+        3:  106-block  1
+call    1 returned 3
+branch  2 taken 2 (fallthrough)
+branch  3 taken 1
+        2:  107:            Offer o = createOffer(getId(&offers->elems[i]), getDestination(&offers->elems[i]), getType(&offers->elems[i]), getDepartureDate(&offers->elems[i]), getPrice(&offers->elems[i]));
+        2:  107-block  0
+call    0 returned 2
+call    1 returned 2
+call    2 returned 2
+call    3 returned 2
+call    4 returned 2
+call    5 returned 2
+        2:  108:            add(&rez, o);
+call    0 returned 2
+        -:  109:        }
+        -:  110:    }
+        1:  111:    return rez;
+        1:  111-block  0
+        -:  112:}
+        -:  113://
+function testAddOffer called 1 returned 100% blocks executed 77%
+        1:  114:void testAddOffer() {
+        1:  115:    Offers offers = createEmpty();
+        1:  115-block  0
+call    0 returned 1
+        -:  116:    //try to add invalid offers
+        -:  117:    char dest[100],type[100];
+        1:  118:    strcpy(dest,"");
+        1:  119:    strcpy(type,"");
+        1:  120:    int error = addOffer(&offers, dest, type, 2020, 10, 10, 10);
+call    0 returned 1
+       1*:  121:    assert(error != 0);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    %%%%%:  121-block  0
+call    2 never executed
+       1*:  122:    assert(size(&offers) == 0);
+        1:  122-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  122-block  1
+call    3 never executed
+        1:  123:    strcpy(dest,"a");
+        1:  124:    strcpy(type,"b");
+        1:  125:    error = addOffer(&offers, dest, type, 2020, 10, 10, -10);
+        1:  125-block  0
+call    0 returned 1
+       1*:  126:    assert(error != 0);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    %%%%%:  126-block  0
+call    2 never executed
+        1:  127:    error = addOffer(&offers, dest, type, 2020, 10, -1, -1);
+        1:  127-block  0
+call    0 returned 1
+       1*:  128:    assert(error != 0);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    %%%%%:  128-block  0
+call    2 never executed
+        1:  129:    error = addOffer(&offers, dest, type, 2020, -1, 10, -1);
+        1:  129-block  0
+call    0 returned 1
+       1*:  130:    assert(error != 0);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    %%%%%:  130-block  0
+call    2 never executed
+        1:  131:    error = addOffer(&offers, dest, type, -1, 10, 10, -1);
+        1:  131-block  0
+call    0 returned 1
+       1*:  132:    assert(error != 0);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    %%%%%:  132-block  0
+call    2 never executed
+        1:  133:    error = addOffer(&offers, dest, type, 2020, 10, 10, -1);
+        1:  133-block  0
+call    0 returned 1
+       1*:  134:    assert(error != 0);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    %%%%%:  134-block  0
+call    2 never executed
+        1:  135:    strcpy(type,"");
+        1:  136:    error = addOffer(&offers, dest, type, 2020, 10, 10, -1);
+        1:  136-block  0
+call    0 returned 1
+       1*:  137:    assert(error != 0);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    %%%%%:  137-block  0
+call    2 never executed
+        1:  138:    strcpy(dest,"");
+        1:  139:    error = addOffer(&offers, dest, type, 2020, 10, 10, -1);
+        1:  139-block  0
+call    0 returned 1
+       1*:  140:    assert(error != 0);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    %%%%%:  140-block  0
+call    2 never executed
+       1*:  141:    assert(size(&offers) == 0);
+        1:  141-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  141-block  1
+call    3 never executed
+        1:  142:    destroy(&offers);
+        1:  142-block  0
+call    0 returned 1
+        1:  143:    Offers offers1 = createEmpty();
+call    0 returned 1
+        -:  144:    //try to add some valid offers
+        1:  145:    strcpy(dest,"a");
+        1:  146:    strcpy(type,"b");
+        1:  147:    addOffer(&offers1, dest, type, 2020, 10, 10, 10);
+call    0 returned 1
+        1:  148:    strcpy(dest,"a2");
+        1:  149:    strcpy(type,"b2");
+        1:  150:    addOffer(&offers1, dest, type, 2020, 10, 10, 20);
+call    0 returned 1
+       1*:  151:    assert(size(&offers1) == 2);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  151-block  0
+call    3 never executed
+        1:  152:    strcpy(dest,"a1");
+        1:  153:    strcpy(type,"b1");
+        1:  154:    updateOffer(&offers1, 1, dest, type, 2020, 10, 10, 10);
+        1:  154-block  0
+call    0 returned 1
+        -:  155:    //try to update with invalid offer
+        1:  156:    strcpy(dest,"");
+        1:  157:    strcpy(type,"");
+        1:  158:    updateOffer(&offers1, 1, dest, type, 2020, 10, 10, 10);
+call    0 returned 1
+       1*:  159:    assert(strcmp(getDestination(&offers1.elems[0]), "a1") == 0);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  159-block  0
+call    3 never executed
+        1:  160:    removeOffer(&offers1, 1);
+        1:  160-block  0
+call    0 returned 1
+       1*:  161:    assert(size(&offers1) == 1);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  161-block  0
+call    3 never executed
+        -:  162:    //display_repo(&offers1);
+        1:  163:    destroy(&offers1);
+        1:  163-block  0
+call    0 returned 1
+        -:  164:    //test the filter function
+        1:  165:    Offers offers2 = createEmpty();
+call    0 returned 1
+        1:  166:    strcpy(dest,"a");
+        1:  167:    strcpy(type,"b");
+        1:  168:    addOffer(&offers2, dest, type, 2020, 10, 10, 10);
+call    0 returned 1
+        1:  169:    strcpy(dest,"a2");
+        1:  170:    strcpy(type,"b2");
+        1:  171:    addOffer(&offers2, dest, type, 2020, 10, 10, 20);
+call    0 returned 1
+        1:  172:    strcpy(dest,"a3");
+        1:  173:    strcpy(type,"b3");
+        1:  174:    addOffer(&offers2, dest, type, 2020, 10, 10, 30);
+call    0 returned 1
+        1:  175:    strcpy(dest,"a");
+        1:  176:    strcpy(type,"b");
+        1:  177:    Offers rez = filterByCriteria(&offers2, type, dest, 10, 20);
+call    0 returned 1
+        -:  178:    //display_repo(&rez);
+       1*:  179:    assert(size(&rez) == 2);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  179-block  0
+call    3 never executed
+        -:  180:
+        1:  181:    destroy(&offers2);
+        1:  181-block  0
+call    0 returned 1
+        1:  182:    destroy(&rez);
+call    0 returned 1
+        -:  183://    test the order function
+        1:  184:    Offers offers3 = createEmpty();
+call    0 returned 1
+        1:  185:    strcpy(dest,"a");
+        1:  186:    strcpy(type,"b");
+        1:  187:    addOffer(&offers3, dest, type, 2020, 10, 10, 10);
+call    0 returned 1
+        1:  188:    strcpy(dest,"a2");
+        1:  189:    strcpy(type,"b2");
+        1:  190:    addOffer(&offers3, dest, type, 2020, 10, 10, 20);
+call    0 returned 1
+        1:  191:    strcpy(dest,"a4");
+        1:  192:    strcpy(type,"b4");
+        1:  193:    addOffer(&offers3, dest, type, 2020, 10, 10, 10);
+call    0 returned 1
+        1:  194:    strcpy(dest,"a3");
+        1:  195:    strcpy(type,"b3");
+        1:  196:    addOffer(&offers3, dest, type, 2020, 10, 10, 10);
+call    0 returned 1
+        1:  197:    strcpy(dest,"a3");
+        1:  198:    strcpy(type,"b3");
+        1:  199:    addOffer(&offers3, dest, type, 2020, 10, 10, 10);
+call    0 returned 1
+        1:  200:    sort(&offers3, function);
+call    0 returned 1
+       1*:  201:    assert(getPrice(&offers3.elems[0]) == 10);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  201-block  0
+call    3 never executed
+       1*:  202:    assert(getPrice(&offers3.elems[1]) == 10);
+        1:  202-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  202-block  1
+call    3 never executed
+       1*:  203:    assert(getPrice(&offers3.elems[2]) == 10);
+        1:  203-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  203-block  1
+call    3 never executed
+       1*:  204:    assert(getPrice(&offers3.elems[3]) == 10);
+        1:  204-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  204-block  1
+call    3 never executed
+       1*:  205:    assert(getPrice(&offers3.elems[4]) == 20);
+        1:  205-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  205-block  1
+call    3 never executed
+        1:  206:    destroy(&offers3);
+        1:  206-block  0
+call    0 returned 1
+        -:  207:    //test add random offers
+        1:  208:    Offers offers4 = createEmpty();
+call    0 returned 1
+        1:  209:    add_random_offers(&offers4, 10);
+call    0 returned 1
+       1*:  210:    assert(size(&offers4) == 10);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  210-block  0
+call    3 never executed
+        1:  211:    destroy(&offers4);
+        1:  211-block  0
+call    0 returned 1
+        1:  212:}

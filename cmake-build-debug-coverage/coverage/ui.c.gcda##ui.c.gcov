@@ -1,0 +1,295 @@
+        -:    0:Source:/mnt/c/Users/proga/Documents/OOP/Lab2-4/ui.c
+        -:    0:Graph:/mnt/c/Users/proga/Documents/OOP/Lab2-4/cmake-build-debug-coverage/CMakeFiles/Lab2_4.dir/ui.c.gcno
+        -:    0:Data:/mnt/c/Users/proga/Documents/OOP/Lab2-4/cmake-build-debug-coverage/CMakeFiles/Lab2_4.dir/ui.c.gcda
+        -:    0:Runs:1
+        -:    1:#include "ui.h"
+        -:    2:#include "repo.h"
+        -:    3:#include "service.h"
+        -:    4:#include "domain.h"
+        -:    5:#include <stdio.h>
+        -:    6:#include <stdbool.h>
+        -:    7:
+function display_menu called 1 returned 100% blocks executed 100%
+        1:    8:void display_menu()
+        -:    9:{
+        1:   10:	printf("1. Add offer\n");
+        1:   10-block  0
+call    0 returned 1
+        1:   11:	printf("2. Update offer\n");
+call    0 returned 1
+        1:   12:	printf("3. Delete offer\n");
+call    0 returned 1
+        1:   13:	printf("4. Order by price and destination\n");
+call    0 returned 1
+        1:   14:	printf("5. Filter by criteria\n");
+call    0 returned 1
+        1:   15:	printf("6. Exit\n");
+call    0 returned 1
+        1:   16:}
+        -:   17:
+function add_offer_ui called 0 returned 0% blocks executed 0%
+    #####:   18:void add_offer_ui(Offers *l)
+        -:   19:{
+    #####:   20:    printf("Type:");
+    %%%%%:   20-block  0
+call    0 never executed
+        -:   21:    char type[20];
+    #####:   22:    scanf("%s", type);
+call    0 never executed
+    #####:   23:    printf("Destination:");
+call    0 never executed
+        -:   24:    char destination[20];
+    #####:   25:    scanf("%s", destination);
+call    0 never executed
+    #####:   26:    printf("Year:");
+call    0 never executed
+        -:   27:    int year;
+    #####:   28:    scanf("%d", &year);
+call    0 never executed
+    #####:   29:    printf("Month:");
+call    0 never executed
+        -:   30:    int month;
+    #####:   31:    scanf("%d", &month);
+call    0 never executed
+    #####:   32:    printf("Day:");
+call    0 never executed
+        -:   33:    int day;
+    #####:   34:    scanf("%d", &day);
+call    0 never executed
+    #####:   35:    printf("Price:");
+call    0 never executed
+        -:   36:    float price;
+    #####:   37:    scanf("%f", &price);
+call    0 never executed
+    #####:   38:    addOffer(l, destination, type, year, month, day, price);
+call    0 never executed
+        -:   39:
+    #####:   40:}
+        -:   41:
+function update_offer_ui called 0 returned 0% blocks executed 0%
+    #####:   42:void update_offer_ui(Offers *l)
+        -:   43:{
+    #####:   44:    printf("Id:");
+    %%%%%:   44-block  0
+call    0 never executed
+        -:   45:    int id;
+    #####:   46:    scanf("%d", &id);
+call    0 never executed
+    #####:   47:    printf("Type:");
+call    0 never executed
+        -:   48:    char type[20];
+    #####:   49:    scanf("%s", type);
+call    0 never executed
+    #####:   50:    printf("Destination:");
+call    0 never executed
+        -:   51:    char destination[20];
+    #####:   52:    scanf("%s", destination);
+call    0 never executed
+    #####:   53:    printf("Year:");
+call    0 never executed
+        -:   54:    int year;
+    #####:   55:    scanf("%d", &year);
+call    0 never executed
+    #####:   56:    printf("Month:");
+call    0 never executed
+        -:   57:    int month;
+    #####:   58:    scanf("%d", &month);
+call    0 never executed
+    #####:   59:    printf("Day:");
+call    0 never executed
+        -:   60:    int day;
+    #####:   61:    scanf("%d", &day);
+call    0 never executed
+    #####:   62:    printf("Price:");
+call    0 never executed
+        -:   63:    float price;
+    #####:   64:    scanf("%f", &price);
+call    0 never executed
+    #####:   65:    updateOffer(l, id, destination, type, year, month, day, price);
+call    0 never executed
+    #####:   66:}
+        -:   67:
+function delete_offer_ui called 0 returned 0% blocks executed 0%
+    #####:   68:void delete_offer_ui(Offers *l)
+        -:   69:{
+    #####:   70:    printf("Id:");
+    %%%%%:   70-block  0
+call    0 never executed
+        -:   71:    int id;
+    #####:   72:    scanf("%d", &id);
+call    0 never executed
+    #####:   73:    removeOffer(l, id);
+call    0 never executed
+    #####:   74:}
+        -:   75:
+function display called 0 returned 0% blocks executed 0%
+    #####:   76:void display(Offers* offers, bool reversed) {
+        -:   77:    //display all offers
+    #####:   78:    if (reversed == false) {
+    %%%%%:   78-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:   79:        for (int i = 0; i < size(offers); i++) {
+    %%%%%:   79-block  0
+    %%%%%:   79-block  1
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   80:            printf("Id:%d Destination:%s Type:%s Departure date:%d-%d-%d Price:%.2f\n", offers->elems[i].id, offers->elems[i].destination, getType(&offers->elems[i]), offers->elems[i].departure_date.year, offers->elems[i].departure_date.month, offers->elems[i].departure_date.day, offers->elems[i].price);
+    %%%%%:   80-block  0
+call    0 never executed
+call    1 never executed
+        -:   81:        }
+        -:   82:    }
+        -:   83:    else {
+    #####:   84:        for (int i = size(offers) - 1; i >= 0; i--) {
+    %%%%%:   84-block  0
+call    0 never executed
+    %%%%%:   84-block  1
+branch  1 never executed
+branch  2 never executed
+    #####:   85:            printf("Id:%d Destination:%s Type:%s Departure date:%d-%d-%d Price:%.2f\n", offers->elems[i].id, offers->elems[i].destination, getType(&offers->elems[i]), offers->elems[i].departure_date.year, offers->elems[i].departure_date.month, offers->elems[i].departure_date.day, offers->elems[i].price);
+    %%%%%:   85-block  0
+call    0 never executed
+call    1 never executed
+        -:   86:        }
+        -:   87:    }
+        -:   88:
+        -:   89:
+    #####:   90:}
+        -:   91:
+function filter called 0 returned 0% blocks executed 0%
+    #####:   92:void filter(Offers* offers){
+        -:   93:    //read criteria
+        -:   94:    //type
+    #####:   95:    printf("Type:");
+    %%%%%:   95-block  0
+call    0 never executed
+        -:   96:    char type[20];
+    #####:   97:    scanf("%s", type);
+call    0 never executed
+        -:   98:    //destination
+    #####:   99:    printf("Destination:");
+call    0 never executed
+        -:  100:    char destination[20];
+    #####:  101:    scanf("%s", destination);
+call    0 never executed
+        -:  102:    //price interval
+        -:  103:    //min price
+    #####:  104:    printf("Min price:");
+call    0 never executed
+        -:  105:    float min_price;
+    #####:  106:    scanf("%f", &min_price);
+call    0 never executed
+        -:  107:    //max price
+    #####:  108:    printf("Max price:");
+call    0 never executed
+        -:  109:    float max_price;
+    #####:  110:    scanf("%f", &max_price);
+call    0 never executed
+        -:  111:
+        -:  112:    Offers rez;
+        -:  113:    //call service function
+    #####:  114:    rez = filterByCriteria(offers, type, destination, min_price, max_price);
+call    0 never executed
+    #####:  115:    display(&rez, false);
+call    0 never executed
+    #####:  116:    printf("ok");
+call    0 never executed
+    #####:  117:    destroy(&rez);
+call    0 never executed
+    #####:  118:}
+        -:  119:
+        -:  120:
+function start called 1 returned 100% blocks executed 30%
+        1:  121:void start()
+        -:  122:{
+        1:  123:    Offers offers = createEmpty();
+        1:  123-block  0
+call    0 returned 1
+        1:  124:    add_random_offers(&offers, 10);
+call    0 returned 1
+        -:  125:	int option;
+        -:  126:	do {
+        1:  127:		display_menu();
+        1:  127-block  0
+call    0 returned 1
+        1:  128:		scanf("%d", &option);
+call    0 returned 1
+        1:  129:		switch (option)
+branch  0 taken 0
+branch  1 taken 0
+branch  2 taken 0
+branch  3 taken 0
+branch  4 taken 0
+branch  5 taken 1
+branch  6 taken 0
+branch  7 taken 0
+        -:  130:		{
+    #####:  131:		case 1:
+    #####:  132:			add_offer_ui(&offers);
+    %%%%%:  132-block  0
+call    0 never executed
+    #####:  133:			break;
+    #####:  134:		case 2:
+    #####:  135:			update_offer_ui(&offers);
+    %%%%%:  135-block  0
+call    0 never executed
+    #####:  136:			break;
+    #####:  137:		case 3:
+    #####:  138:            delete_offer_ui(&offers);
+    %%%%%:  138-block  0
+call    0 never executed
+    #####:  139:			break;
+    #####:  140:		case 4:
+    #####:  141:            sort(&offers, function);
+    %%%%%:  141-block  0
+call    0 never executed
+    #####:  142:                printf("Reversed list?\nY/N:");
+call    0 never executed
+    #####:  143:                getchar();
+call    0 never executed
+        -:  144:                char c;
+    #####:  145:                scanf("%c", &c);
+call    0 never executed
+    #####:  146:                if (c == 'N' || c=='n') display(&offers, false);
+branch  0 never executed
+branch  1 never executed
+    %%%%%:  146-block  0
+branch  2 never executed
+branch  3 never executed
+    %%%%%:  146-block  1
+call    4 never executed
+    #####:  147:                else display(&offers, true);
+    %%%%%:  147-block  0
+call    0 never executed
+    #####:  148:			break;
+    %%%%%:  148-block  0
+    #####:  149:		case 5:
+    #####:  150:            filter(&offers);
+    %%%%%:  150-block  0
+call    0 never executed
+    #####:  151:            break;
+        1:  152:    	case 6:
+        1:  153:			break;
+        1:  153-block  0
+    #####:  154:        case 7:
+    #####:  155:            display(&offers, false);
+    %%%%%:  155-block  0
+call    0 never executed
+    #####:  156:		    break;
+        -:  157:
+    #####:  158:        default:
+    #####:  159:			printf("Invalid option\n");
+    %%%%%:  159-block  0
+call    0 never executed
+    #####:  160:			break;
+        -:  161:		}
+        1:  162:	} while (option != 6);
+        1:  162-block  0
+branch  0 taken 0
+branch  1 taken 1 (fallthrough)
+        1:  163:    destroy(&offers);
+        1:  163-block  0
+call    0 returned 1
+        1:  164:}

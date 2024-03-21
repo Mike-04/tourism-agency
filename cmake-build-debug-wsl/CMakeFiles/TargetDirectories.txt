@@ -1,0 +1,3 @@
+/mnt/c/Users/proga/Documents/OOP/Lab2-4/cmake-build-debug-wsl/CMakeFiles/Lab2_4.dir
+/mnt/c/Users/proga/Documents/OOP/Lab2-4/cmake-build-debug-wsl/CMakeFiles/edit_cache.dir
+/mnt/c/Users/proga/Documents/OOP/Lab2-4/cmake-build-debug-wsl/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,32 @@
+        -:    0:Source:/mnt/c/Users/proga/Documents/OOP/Lab2-4/main.c
+        -:    0:Graph:/mnt/c/Users/proga/Documents/OOP/Lab2-4/cmake-build-debug-coverage/CMakeFiles/Lab2_4.dir/main.c.gcno
+        -:    0:Data:/mnt/c/Users/proga/Documents/OOP/Lab2-4/cmake-build-debug-coverage/CMakeFiles/Lab2_4.dir/main.c.gcda
+        -:    0:Runs:1
+        -:    1:#include "service.h"
+        -:    2:#include "domain.h"
+        -:    3:#include "ui.h"
+        -:    4:
+        -:    5:/*
+        -:    6:9. Agentie de turism
+        -:    7:
+        -:    8:Creati o aplicatie care permite gestiunea ofertelor de la o agentie de turism.
+        -:    9:Fiecare oferta are: tip (munte,mare, citiy break), destinatie, data plecare, pret
+        -:   10:Aplicatia permite:
+        -:   11: a) Adaugarea de noi oferte.
+        -:   12: b) Actualizare oferte
+        -:   13: c) Stergere oferta
+        -:   14: d) Vizualizare oferete ordonat dupa pret, destinatie (crescator/descrescator)
+        -:   15: e) Vizualizare oferta filtrate dupa un criteriu (destinatie, tip, pret)
+        -:   16:*/
+        -:   17:
+        -:   18:
+function main called 1 returned 100% blocks executed 100%
+        1:   19:int main()
+        -:   20:{
+        1:   21:    testAll();
+        1:   21-block  0
+call    0 returned 1
+        1:   22:	start();
+call    0 returned 1
+        1:   23:    return 0;
+        -:   24:} // where test and layered arhitecture

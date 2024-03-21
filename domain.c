@@ -87,57 +87,55 @@ int getId(Offer *o)
 {
     return o->id;
 }
-int setId(Offer *o, int id)
-{
-    o->id = id;
-    return 0;
-}
+//int setId(Offer *o, int id)
+//{
+//    o->id = id;
+//    return 0;
+//}
 
 char *getDestination(Offer *o)
 {
     return o->destination;
 }
-int setDestination(Offer *o, char *destination)
-{
-    strcpy(o->destination, destination);
-    return 0;
-}
+//int setDestination(Offer *o, char *destination)
+//{
+//    strcpy(o->destination, destination);
+//    return 0;
+//}
 
 char *getType(Offer *o)
 {
     return o->type;
 }
-int setType(Offer *o, char *type)
-{
-    strcpy(o->type, type);
-    return 0;
-}
+//int setType(Offer *o, char *type)
+//{
+//    strcpy(o->type, type);
+//    return 0;
+//}
 
 Date getDepartureDate(Offer *o){
     return o->departure_date;
 }
-int setDepartureDate(Offer *o, Date departure_date)
-{
-    o->departure_date = departure_date;
-    return 0;
-}
+//int setDepartureDate(Offer *o, Date departure_date)
+//{
+//    o->departure_date = departure_date;
+//    return 0;
+//}
 
 float getPrice(Offer *o)
 {
     return o->price;
 }
-int setPrice(Offer *o, float price)
-{
-    o->price = price;
-    return 0;
-}
+//int setPrice(Offer *o, float price)
+//{
+//    o->price = price;
+//    return 0;
+//}
 
 //validate offer
 int validateOffer(Offer o)
 {
     //a simple function that validates an offer
-    if (o.id < 0)
-        return 0;
     if (strlen(o.destination) == 0)
         return 0;
     if (strlen(o.type) == 0)
@@ -161,7 +159,10 @@ void testCreateDestroy() {
     assert(d.day == 10);
     destroyDate(&d);
     //printf("destroyed date\n");
-    Offer o = createOffer(1, "a", "b", createDate(2020, 10, 10), 10);
+    char destination[100], type[100];
+    strcpy(destination, "a");
+    strcpy(type, "b");
+    Offer o = createOffer(1, destination, type, createDate(2020, 10, 10), 10);
     assert(getId(&o) == 1);
     assert(strcmp(getDestination(&o), "a") == 0);
     assert(strcmp(getType(&o), "b") == 0);
@@ -170,5 +171,6 @@ void testCreateDestroy() {
     assert(getDepartureDate(&o).day == 10);
     assert(getPrice(&o) == 10);
     destroyOffer(&o);
+    destroyOffer(NULL);
     //printf("destroyed offer\n");
 }

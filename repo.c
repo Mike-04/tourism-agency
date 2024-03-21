@@ -5,8 +5,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Offers createEmpty() {
-    //dynamic allocation
+Offers createEmpty()
+{
+    //alocate memory
     Offers offers;
     offers.size = 0;
     offers.max_size = 100;
@@ -72,6 +73,7 @@ void delete(Offers* offers, int id) {
 void update(Offers* offers, int id, Offer el) {
     for (int i = 0; i < offers->size; i++) {
         if (offers->elems[i].id == id) {
+            destroyOffer(&offers->elems[i]);
             offers->elems[i] = el;
             return;
         }
@@ -83,12 +85,12 @@ Offer get(Offers* offers, int poz) {
 }
 
 
-
-void display_repo(Offers* offers) {
-    for (int i = 0; i < offers->size; i++) {
-        printf("Id:%d Destination:%s Type:%s Departure date:%d-%d-%d Price:%.2f\n", offers->elems[i].id, offers->elems[i].destination, offers->elems[i].type, offers->elems[i].departure_date.year, offers->elems[i].departure_date.month, offers->elems[i].departure_date.day, offers->elems[i].price);
-    }
-}
+//
+//void display_repo(Offers* offers) {
+//    for (int i = 0; i < offers->size; i++) {
+//        printf("Id:%d Destination:%s Type:%s Departure date:%d-%d-%d Price:%.2f\n", offers->elems[i].id, offers->elems[i].destination, offers->elems[i].type, offers->elems[i].departure_date.year, offers->elems[i].departure_date.month, offers->elems[i].departure_date.day, offers->elems[i].price);
+//    }
+//}
 
 void testCreateList() {
     Offers offers = createEmpty();
@@ -103,6 +105,13 @@ void testIterateList() {
     add(&offers, createOffer(2, "c", "d", createDate(2020, 10, 10), 10));
     assert(size(&offers) == 2);
     delete(&offers, 1);
+    delete(&offers, -1);
+    Offer offer;
+    offer = get(&offers, 0);
+    assert(offer.id == 2);
     assert(size(&offers) == 1);
+    for(int i = 0; i < 102; i++) {
+        add(&offers, createOffer(i, "a", "b", createDate(2020, 10, 10), 10));
+    }
     destroy(&offers);
 }

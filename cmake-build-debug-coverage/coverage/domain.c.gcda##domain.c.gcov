@@ -1,0 +1,292 @@
+        -:    0:Source:/mnt/c/Users/proga/Documents/OOP/Lab2-4/domain.c
+        -:    0:Graph:/mnt/c/Users/proga/Documents/OOP/Lab2-4/cmake-build-debug-coverage/CMakeFiles/Lab2_4.dir/domain.c.gcno
+        -:    0:Data:/mnt/c/Users/proga/Documents/OOP/Lab2-4/cmake-build-debug-coverage/CMakeFiles/Lab2_4.dir/domain.c.gcda
+        -:    0:Runs:1
+        -:    1:#include "domain.h"
+        -:    2:#include <string.h>
+        -:    3:#include <assert.h>
+        -:    4:#include <stdlib.h>
+        -:    5:#include <stdio.h>
+        -:    6://int leap_year(int year)
+        -:    7://{
+        -:    8://    //a simple function that checks for leap years
+        -:    9://    if ((year % 4 == 0) && (year % 100 != 0))
+        -:   10://        return 1;
+        -:   11://    if (year % 400 == 0)
+        -:   12://        return 1;
+        -:   13://    return 0;
+        -:   14://}
+        -:   15:
+        -:   16:
+        -:   17://int validateDate(Date d) // kinda overengineered instead of just using linux time but cool
+        -:   18://{
+        -:   19://    // a function that validates a date structure
+        -:   20://    // check if the month is between 1 and 12
+        -:   21://    if (d.month > 12 || d.month < 1)
+        -:   22://        return 0;
+        -:   23://    //check for months with 31 days
+        -:   24://    if (d.month == 1 || d.month == 3 || d.month == 5 || d.month == 7 || d.month == 8 || d.month == 10 || d.month == 12)
+        -:   25://        return (d.day > 0 && d.day <= 31);
+        -:   26://    //check in what kind of year we are and analyze febraury
+        -:   27://    if (d.month == 2)
+        -:   28://        if (leap_year(d.year))
+        -:   29://            return (d.day > 0 && d.day <= 29);
+        -:   30://        else
+        -:   31://            return (d.day > 0 && d.day <= 28);
+        -:   32://    //check for months with 30 days
+        -:   33://    if (d.month == 4 || d.month == 6 || d.month == 9 || d.month == 11)
+        -:   34://        return (d.day > 0 && d.day <= 30);
+        -:   35://}
+        -:   36:
+function createOffer called 147 returned 100% blocks executed 100%
+      147:   37:Offer createOffer(int id, char destination[100], char type[100], Date departure_date, float price)
+        -:   38:{
+        -:   39:    //a simple function that creates an offer
+        -:   40:    Offer o;
+      147:   41:    o.id = id;
+      147:   42:    o.type = (char *)malloc((strlen(type)+1)*sizeof(char));
+      147:   43:    strcpy(o.type, type);
+      147:   44:    o.destination = (char *)malloc((strlen(destination)+1)*sizeof(char));
+      147:   45:    strcpy(o.destination, destination);
+      147:   46:    o.departure_date = departure_date;
+      147:   47:    o.price = price;
+      147:   48:    return o;
+      147:   48-block  0
+        -:   49:}
+        -:   50:
+function createDate called 146 returned 100% blocks executed 100%
+      146:   51:Date createDate(int year, int month, int day)
+        -:   52:{
+        -:   53:    //a simple function that creates a date
+        -:   54:    Date d;
+      146:   55:    d.year = year;
+      146:   56:    d.month = month;
+      146:   57:    d.day = day;
+      146:   58:    return d;
+      146:   58-block  0
+        -:   59:}
+        -:   60:
+function destroyOffer called 148 returned 100% blocks executed 100%
+      148:   61:void destroyOffer(Offer *o)
+        -:   62:{
+        -:   63:    //dealocate offer
+        -:   64:    //printf("Id:%d Destination:%s Type:%s Departure date:%d-%d-%d Price:%.2f\n", o->id, o->destination, getType(o), o->departure_date.year, o->departure_date.month, o->departure_date.day, o->price);
+      148:   65:    if (o == NULL)
+      148:   65-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 147
+        1:   66:        return;
+        1:   66-block  0
+      147:   67:    o->departure_date.year = -1;
+      147:   68:    o->departure_date.month = -1;
+      147:   69:    o->departure_date.day = -1;
+      147:   70:    o->id = -1;
+      147:   71:    o->price = -1;
+      147:   72:    strcpy(o->destination, "\0");
+      147:   73:    strcpy(o->type, "\0");
+      147:   74:    free(o->destination);
+      147:   75:    free(o->type);
+      147:   75-block  0
+        -:   76:
+        -:   77:}
+        -:   78:
+function destroyDate called 1 returned 100% blocks executed 100%
+        1:   79:void destroyDate(Date *d)
+        -:   80:{
+        -:   81:    //dealocate date
+        1:   82:}
+        -:   83:
+        -:   84://getters and setters for offer
+        -:   85:
+function getId called 3 returned 100% blocks executed 100%
+        3:   86:int getId(Offer *o)
+        -:   87:{
+        3:   88:    return o->id;
+        3:   88-block  0
+        -:   89:}
+        -:   90://int setId(Offer *o, int id)
+        -:   91://{
+        -:   92://    o->id = id;
+        -:   93://    return 0;
+        -:   94://}
+        -:   95:
+function getDestination called 7 returned 100% blocks executed 100%
+        7:   96:char *getDestination(Offer *o)
+        -:   97:{
+        7:   98:    return o->destination;
+        7:   98-block  0
+        -:   99:}
+        -:  100://int setDestination(Offer *o, char *destination)
+        -:  101://{
+        -:  102://    strcpy(o->destination, destination);
+        -:  103://    return 0;
+        -:  104://}
+        -:  105:
+function getType called 6 returned 100% blocks executed 100%
+        6:  106:char *getType(Offer *o)
+        -:  107:{
+        6:  108:    return o->type;
+        6:  108-block  0
+        -:  109:}
+        -:  110://int setType(Offer *o, char *type)
+        -:  111://{
+        -:  112://    strcpy(o->type, type);
+        -:  113://    return 0;
+        -:  114://}
+        -:  115:
+function getDepartureDate called 5 returned 100% blocks executed 100%
+        5:  116:Date getDepartureDate(Offer *o){
+        5:  117:    return o->departure_date;
+        5:  117-block  0
+        -:  118:}
+        -:  119://int setDepartureDate(Offer *o, Date departure_date)
+        -:  120://{
+        -:  121://    o->departure_date = departure_date;
+        -:  122://    return 0;
+        -:  123://}
+        -:  124:
+function getPrice called 14 returned 100% blocks executed 100%
+       14:  125:float getPrice(Offer *o)
+        -:  126:{
+       14:  127:    return o->price;
+       14:  127-block  0
+        -:  128:}
+        -:  129://int setPrice(Offer *o, float price)
+        -:  130://{
+        -:  131://    o->price = price;
+        -:  132://    return 0;
+        -:  133://}
+        -:  134:
+        -:  135://validate offer
+function validateOffer called 40 returned 100% blocks executed 100%
+       40:  136:int validateOffer(Offer o)
+        -:  137:{
+        -:  138:    //a simple function that validates an offer
+       40:  139:    if (strlen(o.destination) == 0)
+       40:  139-block  0
+branch  0 taken 3 (fallthrough)
+branch  1 taken 37
+        3:  140:        return 0;
+        3:  140-block  0
+       37:  141:    if (strlen(o.type) == 0)
+       37:  141-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 36
+        1:  142:        return 0;
+        1:  142-block  0
+       36:  143:    if (o.departure_date.year < 0)
+       36:  143-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 35
+        1:  144:        return 0;
+        1:  144-block  0
+       35:  145:    if (o.departure_date.month < 0)
+       35:  145-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 34
+        1:  146:        return 0;
+        1:  146-block  0
+       34:  147:    if (o.departure_date.day < 0)
+       34:  147-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 33
+        1:  148:        return 0;
+        1:  148-block  0
+       33:  149:    if (o.price < 0)
+       33:  149-block  0
+branch  0 taken 2 (fallthrough)
+branch  1 taken 31
+        2:  150:        return 0;
+        2:  150-block  0
+       31:  151:    return 1;
+       31:  151-block  0
+        -:  152:}
+        -:  153:
+        -:  154:
+function testCreateDestroy called 1 returned 100% blocks executed 71%
+        1:  155:void testCreateDestroy() {
+        1:  156:    Date d = createDate(2020, 10, 10);
+        1:  156-block  0
+call    0 returned 1
+       1*:  157:    assert(d.year == 2020);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    %%%%%:  157-block  0
+call    2 never executed
+       1*:  158:    assert(d.month == 10);
+        1:  158-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    %%%%%:  158-block  1
+call    2 never executed
+       1*:  159:    assert(d.day == 10);
+        1:  159-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    %%%%%:  159-block  1
+call    2 never executed
+        1:  160:    destroyDate(&d);
+        1:  160-block  0
+call    0 returned 1
+        -:  161:    //printf("destroyed date\n");
+        -:  162:    char destination[100], type[100];
+        1:  163:    strcpy(destination, "a");
+        1:  164:    strcpy(type, "b");
+        1:  165:    Offer o = createOffer(1, destination, type, createDate(2020, 10, 10), 10);
+call    0 returned 1
+call    1 returned 1
+       1*:  166:    assert(getId(&o) == 1);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  166-block  0
+call    3 never executed
+       1*:  167:    assert(strcmp(getDestination(&o), "a") == 0);
+        1:  167-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  167-block  1
+call    3 never executed
+       1*:  168:    assert(strcmp(getType(&o), "b") == 0);
+        1:  168-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  168-block  1
+call    3 never executed
+       1*:  169:    assert(getDepartureDate(&o).year == 2020);
+        1:  169-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  169-block  1
+call    3 never executed
+       1*:  170:    assert(getDepartureDate(&o).month == 10);
+        1:  170-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  170-block  1
+call    3 never executed
+       1*:  171:    assert(getDepartureDate(&o).day == 10);
+        1:  171-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  171-block  1
+call    3 never executed
+       1*:  172:    assert(getPrice(&o) == 10);
+        1:  172-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  172-block  1
+call    3 never executed
+        1:  173:    destroyOffer(&o);
+        1:  173-block  0
+call    0 returned 1
+        1:  174:    destroyOffer(NULL);
+call    0 returned 1
+        -:  175:    //printf("destroyed offer\n");
+        1:  176:}

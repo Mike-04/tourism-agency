@@ -62,9 +62,7 @@ void update_offer_ui(Offers *l)
     printf("Price:");
     float price;
     scanf("%f", &price);
-    Date d = createDate(year, month, day);
-    Offer o = createOffer(id, destination, type, d, price);
-    updateOffer(l, id, o);
+    updateOffer(l, id, destination, type, year, month, day, price);
 }
 
 void delete_offer_ui(Offers *l)
@@ -140,7 +138,7 @@ void start()
             delete_offer_ui(&offers);
 			break;
 		case 4:
-            orderByPriceAndDestination(&offers);
+            sort(&offers, function);
                 printf("Reversed list?\nY/N:");
                 getchar();
                 char c;
@@ -154,7 +152,7 @@ void start()
     	case 6:
 			break;
         case 7:
-            display_repo(&offers);
+            display(&offers, false);
 		    break;
 
         default:
