@@ -4,7 +4,7 @@
 #include <string.h>
 #include <assert.h>
 
-
+// Tests all functionalities.
 void testAll() {
     testCreateDestroy();
      testCreateList();
@@ -12,13 +12,24 @@ void testAll() {
      testAddOffer();
 }
 
-
+// Generates a unique ID for a new offer.
+// Parameters:
+// - l: A pointer to the Offers struct.
+// Returns: The generated ID.
 int generateId(Offers *l) {
     //take the biggest id from the repo and add 1
     int id = size(l);
     return id+1;
 }
 
+// Adds a new offer to the repository.
+// Parameters:
+// - offers: A pointer to the Offers struct.
+// - destination: The destination of the offer.
+// - type: The type of the offer.
+// - year, month, day: The departure date of the offer.
+// - price: The price of the offer.
+// Returns: 0 if the offer is added successfully, -1 if the offer is invalid.
 int addOffer(Offers* offers, char destination[100], char type[100], int year, int month, int day , float price) {
     Date d = createDate(year, month, day);
     Offer o = createOffer(generateId(offers), destination, type, d, price);
@@ -31,6 +42,15 @@ int addOffer(Offers* offers, char destination[100], char type[100], int year, in
     return 0;
 }
 
+// Updates an existing offer in the repository.
+// Parameters:
+// - offers: A pointer to the Offers struct.
+// - id: The ID of the offer to be updated.
+// - destination: The new destination of the offer.
+// - type: The new type of the offer.
+// - year, month, day: The new departure date of the offer.
+// - price: The new price of the offer.
+// Returns: 0 if the offer is updated successfully, -1 if the offer is invalid.
 int updateOffer(Offers* offers, int id, char destination[100], char type[100], int year, int month, int day , float price) {
     Date d = createDate(year, month, day);
     Offer o = createOffer(id, destination, type, d, price);
@@ -44,6 +64,10 @@ int updateOffer(Offers* offers, int id, char destination[100], char type[100], i
     return 0;
 }
 
+// Adds a specified quantity of random offers to the repository.
+// Parameters:
+// - offers: A pointer to the Offers struct.
+// - quantity: The number of random offers to be added.
 void add_random_offers(Offers*offers, int quantity) {
 for (int i = 0; i < quantity; i++) {
         char type[100],dest[100];
@@ -53,6 +77,10 @@ for (int i = 0; i < quantity; i++) {
 }
 }
 
+// Comparison function used for sorting offers by price and destination.
+// Parameters:
+// - o1, o2: Pointers to the offers to be compared.
+// Returns: 1 if o1 is greater, -1 if o2 is greater, 0 if they are equal.
 int function(Offer* o1, Offer* o2) {
     //price and destination
     if (o1->price > o2->price)
@@ -66,6 +94,10 @@ int function(Offer* o1, Offer* o2) {
     return 0;
 }
 
+// Sorts the offers in the repository based on a specified comparison function.
+// Parameters:
+// - offers: A pointer to the Offers struct.
+// - function: The comparison function used for sorting.
 void sort(Offers * offers,int (function(Offer*,Offer* )))
 {
     for (int i = 0; i < size(offers) - 1; i++) {
@@ -79,6 +111,7 @@ void sort(Offers * offers,int (function(Offer*,Offer* )))
     }
 }
 
+//old sorting function
 //void orderByPriceAndDestination(Offers* offers) {
 //    for (int i = 0; i < size(offers) - 1; i++) {
 //        for (int j = i + 1; j < size(offers); j++) {
@@ -93,11 +126,23 @@ void sort(Offers * offers,int (function(Offer*,Offer* )))
 //                    offers->elems[i] = offers->elems[j];
 //                    offers->elems[j] = aux;}}}}}
 
+// Deletes an offer from the repository.
+// Parameters:
+// - offers: A pointer to the Offers struct.
+// - id: The ID of the offer to be deleted.
 int removeOffer(Offers* offers, int id) {
     delete(offers, id);
     return 0;
 }
 
+// Filters the offers in the repository based on specified criteria.
+// Parameters:
+// - offers: A pointer to the Offers struct.
+// - type: The type criteria for filtering.
+// - dest: The destination criteria for filtering.
+// - min_price: The minimum price criteria for filtering.
+// - max_price: The maximum price criteria for filtering.
+// Returns: A new Offers struct containing the filtered offers.
 Offers filterByCriteria(Offers * offers, char type[], char dest[], float min_price, float max_price){
     //filter the offers
     Offers rez = createEmpty();
@@ -110,7 +155,9 @@ Offers filterByCriteria(Offers * offers, char type[], char dest[], float min_pri
     }
     return rez;
 }
-//
+
+// Tests the service functions.
+// Tests the addOffer, updateOffer, filterByCriteria, and sort functions.
 void testAddOffer() {
     Offers offers = createEmpty();
     //try to add invalid offers

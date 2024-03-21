@@ -3,6 +3,8 @@
 #include <assert.h>
 #include <stdlib.h>
 #include <stdio.h>
+
+//helper function for old implementation of validateDate
 //int leap_year(int year)
 //{
 //    //a simple function that checks for leap years
@@ -13,7 +15,7 @@
 //    return 0;
 //}
 
-
+//not used anymore but kept for future use
 //int validateDate(Date d) // kinda overengineered instead of just using linux time but cool
 //{
 //    // a function that validates a date structure
@@ -34,6 +36,14 @@
 //        return (d.day > 0 && d.day <= 30);
 //}
 
+//create offer function create an offer with the given parameters
+//Parameters:
+//id - the id of the offer
+//destination - the destination of the offer
+//type - the type of the offer
+//departure_date - the departure date of the offer
+//price - the price of the offer
+//Returns: the created offer
 Offer createOffer(int id, char destination[100], char type[100], Date departure_date, float price)
 {
     //a simple function that creates an offer
@@ -48,6 +58,12 @@ Offer createOffer(int id, char destination[100], char type[100], Date departure_
     return o;
 }
 
+//create date function create a date with the given parameters
+//Parameters:
+//year - the year of the date
+//month - the month of the date
+//day - the day of the date
+//Returns: the created date
 Date createDate(int year, int month, int day)
 {
     //a simple function that creates a date
@@ -58,6 +74,9 @@ Date createDate(int year, int month, int day)
     return d;
 }
 
+//destroy offer function dealocate the memory of the offer
+//Parameters:
+//o - the offer to be dealocated
 void destroyOffer(Offer *o)
 {
     //dealocate offer
@@ -76,12 +95,16 @@ void destroyOffer(Offer *o)
 
 }
 
+//destroy date function dealocate the memory of the date
+//Parameters:
+//d - the date to be dealocated
 void destroyDate(Date *d)
 {
     //dealocate date
 }
 
 //getters and setters for offer
+//setters not used
 
 int getId(Offer *o)
 {
@@ -133,6 +156,9 @@ float getPrice(Offer *o)
 //}
 
 //validate offer
+//Parameters:
+//o - the offer to be validated
+//Returns: 1 if the offer is valid, 0 otherwise
 int validateOffer(Offer o)
 {
     //a simple function that validates an offer
@@ -151,7 +177,7 @@ int validateOffer(Offer o)
     return 1;
 }
 
-
+//test function for domain
 void testCreateDestroy() {
     Date d = createDate(2020, 10, 10);
     assert(d.year == 2020);

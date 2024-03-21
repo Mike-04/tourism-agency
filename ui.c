@@ -5,6 +5,9 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+//display the menu
+//Parameters: none
+//Returns: none
 void display_menu()
 {
 	printf("1. Add offer\n");
@@ -15,13 +18,16 @@ void display_menu()
 	printf("6. Exit\n");
 }
 
+//add an offer to the list
+//Parameters: Offers* l - the list of offers
+//Returns: none
 void add_offer_ui(Offers *l)
 {
     printf("Type:");
-    char type[20];
+    char type[100];
     scanf("%s", type);
     printf("Destination:");
-    char destination[20];
+    char destination[100];
     scanf("%s", destination);
     printf("Year:");
     int year;
@@ -39,16 +45,19 @@ void add_offer_ui(Offers *l)
 
 }
 
+//update an offer from the list
+//Parameters: Offers* l - the list of offers
+//Returns: none
 void update_offer_ui(Offers *l)
 {
     printf("Id:");
     int id;
     scanf("%d", &id);
     printf("Type:");
-    char type[20];
+    char type[100];
     scanf("%s", type);
     printf("Destination:");
-    char destination[20];
+    char destination[100];
     scanf("%s", destination);
     printf("Year:");
     int year;
@@ -65,6 +74,10 @@ void update_offer_ui(Offers *l)
     updateOffer(l, id, destination, type, year, month, day, price);
 }
 
+
+//delete an offer from the list
+//Parameters: Offers* l - the list of offers
+//Returns: none
 void delete_offer_ui(Offers *l)
 {
     printf("Id:");
@@ -73,6 +86,11 @@ void delete_offer_ui(Offers *l)
     removeOffer(l, id);
 }
 
+
+//display all offers from a list
+//Parameters: Offers* offers - the list of offers
+//            bool reversed - if true, the list will be displayed in reversed order
+//Returns: none
 void display(Offers* offers, bool reversed) {
     //display all offers
     if (reversed == false) {
@@ -89,15 +107,19 @@ void display(Offers* offers, bool reversed) {
 
 }
 
+
+//filter by criteria and display
+//Parameters: Offers* offers - the list of offers
+//Returns: none
 void filter(Offers* offers){
     //read criteria
     //type
     printf("Type:");
-    char type[20];
+    char type[100];
     scanf("%s", type);
     //destination
     printf("Destination:");
-    char destination[20];
+    char destination[100];
     scanf("%s", destination);
     //price interval
     //min price
@@ -117,7 +139,10 @@ void filter(Offers* offers){
     destroy(&rez);
 }
 
-
+//entry point for the app
+//u can comment add_random_offers(&offers, 10); to add offers manually
+//Parameters: none
+//Returns: none
 void start()
 {
     Offers offers = createEmpty();
